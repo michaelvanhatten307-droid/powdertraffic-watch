@@ -1,9 +1,9 @@
 
-name: "Update Traffic Data"
+name: Update Traffic Data
 
 on:
   schedule:
-    - cron: "*/15 * * * *"
+    - cron: "*/15 * * * *" # Runs every 15 minutes
   workflow_dispatch:
 
 permissions:
@@ -12,6 +12,7 @@ permissions:
 jobs:
   update-data:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -29,7 +30,8 @@ jobs:
       - name: Run fetch_data.py
         env:
           UDOT_API_KEY: ${{ secrets.UDOT_API_KEY }}
-        run: python scripts/fetch_data.py
+        run: |
+          python scripts/fetch_data.py
 
       - name: Commit and push updated data.json
         run: |
