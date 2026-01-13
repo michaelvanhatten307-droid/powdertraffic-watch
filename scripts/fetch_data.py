@@ -1,53 +1,54 @@
 
-name: "Update Traffic Data"
+import requests
+import os
 
-on:
-  schedule:
-    - cron: '*/15 * * * *'  # Every 15 minutes (UTC)
-  workflow_dispatch:        # Manual trigger
+API_KEY = os.getenv("UDOT_API_KEY")
+BASE_URL = "https://www.udottraffic.utah.gov/api/v2"
 
-permissions:
-  contents: write           # Needed to push commits using GITHUB_TOKEN
+def get_udot_data(endpoint):
+    url = f"{BASE_URL}/{endpoint}?key={API_KEY}&format=json"
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+        return response.json()
+    except Exception as e:
+        print(f"Error fetching {endpoint}: {e}")
+        return []
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
+def filter_by_route(data, routes=["SR-210", "SR-190"], key="Route"):
+    """Filter UDOT data by route names."""
+    return [item for item in data if any(r in str(item.get(key, "")) for r in routes)]
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          persist-credentials: true  # Uses the auto-provided GITHUB_TOKEN for pushes
+def process_canyons():
+    # 1. Road Conditions
+    conditions = filter_by_route(get_udot_data("get/roadconditions"))
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-          cache: 'pip'               # Speeds up dependency installs
+    # 2. Drive Times
+    drive_times = filter_by_route(get_udot_data("get/drivetimes"))
 
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          if [ -f requirements.txt ]; then
-            pip install -r requirements.txt
-          else
-            pip install requests python-dotenv
-          fi
+    # 3. Cameras
+    cameras = filter_by_route(get_udot_data("get/cameras"))
 
-      - name: Run update script
-        env:
-          UDOT_API_KEY: ${{ secrets.UDOT_API_KEY }}  # Inject secret from GitHub
-        run: |
-          python scripts/fetch_data.py
+    # 4. Snowplows
+    snowplows = filter_by_route(get_udot_data("get/snowplows"), key="RouteName")
 
-      - name: Commit changes (if any)
-        run: |
-          git config user.name "TrafficBot"
-          git config user.email "bot@powdertraffic.com"
-          if ! git diff --quiet; then
-            git add -A
-            git commit -m "Auto-update traffic ($(date -u +'%Y-%m-%d %H:%M:%S UTC'))"
-            git push
-          else
-            echo "No changes to commit."
-          fi
+    # 5. Events & Alerts
+    events = filter_by_route(get_udot_data("get/events"))
+    alerts = filter_by_route(get_udot_data("get/alerts"))
+
+    # Combine results
+    canyon_data = {
+        "road_conditions": conditions,
+        "drive_times": drive_times,
+        "cameras": cameras,
+        "snowplows": snowplows,
+        "events": events,
+        "alerts": alerts
+    }
+
+    return canyon_data
+
+if __name__ == "__main__":
+    data = process_canyons()
+    print("Filtered Canyon Data:")
+    print(data)
