@@ -1,5 +1,5 @@
 
-name: Update Traffic Data
+name: "Update Traffic Data"
 
 on:
   schedule:
