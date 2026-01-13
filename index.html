@@ -46,6 +46,17 @@
         // Add markers for the Canyons
         L.marker([40.57, -111.79]).addTo(map).bindPopup('Little Cottonwood');
         L.marker([40.62, -111.78]).addTo(map).bindPopup('Big Cottonwood');
+// Function to update the UI with real data
+async function updateDashboard() {
+    const response = await fetch('data.json');
+    const data = await response.json();
+
+    document.getElementById('lcc-time').innerText = data.lcc_travel_time;
+    document.getElementById('bcc-time').innerText = data.bcc_travel_time;
+    document.getElementById('last-update').innerText = "LAST_SYNC: " + data.last_updated;
+}
+setInterval(updateDashboard, 60000); // Check for new data every minute
+updateDashboard(); // Run once on load
     </script>
 </body>
 </html>
