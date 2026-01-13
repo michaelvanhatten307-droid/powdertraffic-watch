@@ -6,10 +6,16 @@
   "last_updated": "SIMULATION_MODE",
   "plows": [
     {
-      "VehicleID": "PLOW_6152",
+      "VehicleID": "PLOW_TEST_01",
       "Latitude": 40.573,
       "Longitude": -111.795,
       "Status": "PLOWING"
+    },
+    {
+      "VehicleID": "PLOW_TEST_02",
+      "Latitude": 40.638,
+      "Longitude": -111.724,
+      "Status": "HEAVY_DUTY"
     }
   ]
 }
