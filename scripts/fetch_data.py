@@ -1,32 +1,28 @@
 import requests
 import json
 import os
-from datetime import datetime
 
-# 1. Setup - This uses the Secret Key you saved in Settings earlier
 API_KEY = os.environ.get('UDOT_API_KEY')
-DATA_FILE = 'data.json'
+# Official UDOT Base URL from your research
+BASE_URL = "https://www.udottraffic.utah.gov/api/v2"
 
-def fetch_traffic():
-    # This is a placeholder URL - UDOT usually provides a specific 'Traffic Speed' endpoint
-    # For now, we will simulate the logic so you can see it work on your site
-    print("Connecting to UDOT...")
-    
-    # In a real scenario, you'd do: response = requests.get(f"URL?key={API_KEY}")
-    # Let's create some 'live' looking data for your dashboard
-    new_data = {
-        "bcc_status": "OPEN",
-        "lcc_status": "RESTRICTED",
-        "bcc_travel_time": "24 mins",
-        "lcc_travel_time": "45 mins",
-        "last_updated": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-        "message": "UDOT: Traction Law in Effect for LCC."
-    }
-    
-    # Save it to your data.json file
-    with open(DATA_FILE, 'w') as f:
-        json.dump(new_data, f, indent=4)
-    print("Data updated successfully!")
+def get_udot_data(endpoint):
+    url = f"{BASE_URL}/{endpoint}?key={API_KEY}&format=json"
+    try:
+        response = requests.get(url)
+        return response.json()
+    except:
+        return []
 
-if __name__ == "__main__":
-    fetch_traffic()
+def process_canyons():
+    # 1. Fetch Road Conditions
+    conditions = get_udot_data("get/roadconditions")
+    
+    # 2. Fetch Alerts/Events
+    alerts = get_udot_data("get/events")
+    
+    # 3. Fetch Cameras
+    cameras = get_udot_data("get/cameras")
+
+    # Filter logic for SR-210 and SR-190 goes here...
+    # (We will write this tomorrow once your key arrives!)
