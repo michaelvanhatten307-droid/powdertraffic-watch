@@ -12,6 +12,7 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -26,7 +27,6 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          # If you have a requirements.txt, use it; otherwise install what you need here
           if [ -f requirements.txt ]; then
             pip install -r requirements.txt
           else
@@ -35,21 +35,17 @@ jobs:
 
       - name: Run update script
         env:
-          UDOT_API_KEY: ${{ secrets.UDOT_API_KEY }}  # Inject secret
+          UDOT_API_KEY: ${{ secrets.UDOT_API_KEY }}  # Inject secret from GitHub
         run: |
-          # Example: run your Python updater
-          # Replace `scripts/update_udot.py` with your actual script path
-          python scripts/update_udot.py
+          python fetch_data.py
 
       - name: Commit changes (if any)
         run: |
           git config user.name "TrafficBot"
           git config user.email "bot@powdertraffic.com"
-          # Only commit when there are changes
           if ! git diff --quiet; then
             git add -A
             git commit -m "Auto-update traffic ($(date -u +'%Y-%m-%d %H:%M:%S UTC'))"
             git push
           else
             echo "No changes to commit."
-          fi
