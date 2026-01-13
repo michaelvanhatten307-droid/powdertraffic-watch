@@ -9,54 +9,56 @@
     <style>
         body { background-color: #0a0a0a; color: #00ff41; font-family: monospace; }
         #map { height: 300px; border: 1px solid #333; }
+        /* A subtle pulse animation for the status lights */
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+        .live-indicator { animation: pulse 2s infinite; }
     </style>
 </head>
-<body class="p-4">
-    <header class="mb-8 border-b border-green-900 pb-4">
-        <h1 class="text-3xl font-bold tracking-tighter">POWDERTRAFFIC//WATCH_V1.0</h1>
-        <p id="clock">SYSTEM_STATUS: ACTIVE</p>
+<body class="p-4 max-w-6xl mx-auto">
+    
+    <header class="mb-8 border-b border-green-900 pb-4 flex justify-between items-end">
+        <div>
+            <h1 class="text-2xl md:text-3xl font-bold tracking-tighter text-white">POWDERTRAFFIC//WATCH</h1>
+            <p class="text-xs text-green-600">LIVE CANYON MONITORING SYSTEM</p>
+        </div>
+        <div class="text-right">
+            <p id="clock" class="text-xs text-gray-400">SYSTEM_STATUS: ACTIVE</p>
+            <span class="live-indicator inline-block w-2 h-2 bg-red-500 rounded-full"></span>
+        </div>
     </header>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div class="border border-green-900 p-6 bg-black">
-            <h2 class="text-xl mb-4 underline">CANYON_STATUS</h2>
-            <div class="flex justify-between items-center mb-2">
-                <span>LITTLE COTTONWOOD (SR-210)</span>
-                <span class="px-2 py-1 bg-green-900 text-white font-bold">OPEN</span>
-            </div>
-            <div class="flex justify-between items-center">
-                <span>BIG COTTONWOOD (SR-190)</span>
-                <span class="px-2 py-1 bg-red-900 text-white font-bold">DELAY</span>
-            </div>
-        </div>
-
-        <div class="border border-green-900 bg-black overflow-hidden">
-            <div id="map"></div>
-        </div>
-    </div>
-
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script>
-        // Initialize Map centered on the Canyons
-        var map = L.map('map').setView([40.60, -111.75], 11);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '© OpenStreetMap'
-        }).addTo(map);
         
-        // Add markers for the Canyons
-        L.marker([40.57, -111.79]).addTo(map).bindPopup('Little Cottonwood');
-        L.marker([40.62, -111.78]).addTo(map).bindPopup('Big Cottonwood');
-// Function to update the UI with real data
-async function updateDashboard() {
-    const response = await fetch('data.json');
-    const data = await response.json();
+        <div class="border border-green-900 p-6 bg-black relative">
+            <h2 class="text-xl mb-6 underline decoration-green-700 decoration-2 underline-offset-4">CANYON_STATUS</h2>
+            
+            <div class="flex justify-between items-center mb-6 border-b border-green-900/30 pb-4">
+                <div>
+                    <p class="text-[10px] text-gray-500 mb-1">SR-210 (LITTLE COTTONWOOD)</p>
+                    <span id="lcc-status" class="px-2 py-1 bg-gray-800 text-white font-bold text-sm tracking-widest border border-gray-600">LOADING</span>
+                </div>
+                <div class="text-right">
+                    <p class="text-[10px] text-gray-500 mb-1">EST. TIME</p>
+                    <span id="lcc-time" class="text-3xl font-bold text-white">--</span>
+                    <span class="text-sm text-gray-500">min</span>
+                </div>
+            </div>
 
-    document.getElementById('lcc-time').innerText = data.lcc_travel_time;
-    document.getElementById('bcc-time').innerText = data.bcc_travel_time;
-    document.getElementById('last-update').innerText = "LAST_SYNC: " + data.last_updated;
-}
-setInterval(updateDashboard, 60000); // Check for new data every minute
-updateDashboard(); // Run once on load
-    </script>
-</body>
-</html>
+            <div class="flex justify-between items-center">
+                <div>
+                    <p class="text-[10px] text-gray-500 mb-1">SR-190 (BIG COTTONWOOD)</p>
+                    <span id="bcc-status" class="px-2 py-1 bg-gray-800 text-white font-bold text-sm tracking-widest border border-gray-600">LOADING</span>
+                </div>
+                <div class="text-right">
+                    <p class="text-[10px] text-gray-500 mb-1">EST. TIME</p>
+                    <span id="bcc-time" class="text-3xl font-bold text-white">--</span>
+                    <span class="text-sm text-gray-500">min</span>
+                </div>
+            </div>
+
+            <div class="absolute bottom-2 right-2">
+                <span id="last-update" class="text-[10px] text-gray-600">WAITING FOR DATA...</span>
