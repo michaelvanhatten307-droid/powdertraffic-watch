@@ -10,16 +10,12 @@
     <style>
         body { background-color: #0a0a0a; color: #00ff41; font-family: monospace; }
         #map { height: 300px; border: 1px solid #333; }
-        /* A subtle pulse animation for the status lights */
         @keyframes pulse {
             0% { opacity: 1; }
             50% { opacity: 0.5; }
             100% { opacity: 1; }
         }
         .live-indicator { animation: pulse 2s infinite; }
-
-        /* Ensure Chart canvas fills its container */
-        #trafficChart { width: 100% !important; height: 100% !important; display: block; }
     </style>
 </head>
 <body class="p-4 max-w-6xl mx-auto">
@@ -35,11 +31,9 @@
         </div>
     </header>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
-        
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div class="border border-green-900 p-6 bg-black relative">
             <h2 class="text-xl mb-6 underline decoration-green-700 decoration-2 underline-offset-4">CANYON_STATUS</h2>
-            
             <div class="flex justify-between items-center mb-6 border-b border-green-900/30 pb-4">
                 <div>
                     <p class="text-[10px] text-gray-500 mb-1">SR-210 (LITTLE COTTONWOOD)</p>
@@ -51,8 +45,7 @@
                     <span class="text-sm text-gray-500">min</span>
                 </div>
             </div>
-
-            <div class="flex justify-between items-center mb-6">
+            <div class="flex justify-between items-center">
                 <div>
                     <p class="text-[10px] text-gray-500 mb-1">SR-190 (BIG COTTONWOOD)</p>
                     <span id="bcc-status" class="px-2 py-1 bg-gray-800 text-white font-bold text-sm tracking-widest border border-gray-600">LOADING</span>
@@ -63,163 +56,132 @@
                     <span class="text-sm text-gray-500">min</span>
                 </div>
             </div>
-
             <div class="absolute bottom-2 right-2">
                 <span id="last-update" class="text-[10px] text-gray-600">WAITING FOR DATA...</span>
             </div>
         </div>
 
         <div class="space-y-6">
-            
-            <div class="border border-green-900 bg-black p-1 h-64 relative overflow-hidden">
-                <div class="absolute top-2 left-2 z-[400] bg-black/80 px-2 py-1 border border-green-900 text-[10px] text-green-500">
-                    LIVE_TRACKING
-                </div>
+            <div class="border border-green-900 bg-black p-1 h-64 relative">
+                <div class="absolute top-2 left-2 z-[400] bg-black/80 px-2 py-1 border border-green-900 text-[10px] text-green-500">LIVE_TRACKING</div>
                 <div id="map" class="h-full w-full"></div>
             </div>
-
             <div class="border border-green-900 bg-black p-4 h-64 overflow-hidden flex flex-col">
                 <h3 class="text-xs text-gray-500 mb-2 border-b border-green-900/30 pb-1">COMMUNITY_INTEL // #COTTONWOODCANYONS</h3>
-                
                 <div id="social-feed" class="overflow-y-auto space-y-3 pr-2 scrollbar-thin scrollbar-thumb-green-900 scrollbar-track-black">
                     <p class="text-xs text-gray-600 animate-pulse">Scanning social frequencies...</p>
                 </div>
             </div>
+        </div>
+    </div> <div class="mt-6 border border-green-900 bg-black p-6">
+        <h3 class="text-xl mb-4 underline decoration-green-700 decoration-2 underline-offset-4 uppercase tracking-widest">Traffic_Trend_Analysis</h3>
+        <div class="h-64 w-full">
+            <canvas id="trafficChart"></canvas>
+        </div>
+    </div>
 
-            <!-- Inserted Traffic Trend Analysis -->
-            <div class="mt-6 border border-green-900 bg-black p-6">
-                <h3 class="text-xl mb-4 underline decoration-green-700 decoration-2 underline-offset-4 uppercase tracking-widest">Traffic_Trend_Analysis</h3>
-                <div class="h-64 w-full">
-                    <canvas id="trafficChart"></canvas>
-                </div>
-             <div class="mt-6 border border-green-900 bg-black p-6">
-    <h3 class="text-xl mb-4 underline decoration-green-700 uppercase tracking-widest">Canyon_Surveillance_V3.0</h3>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-        <div class="border border-green-900 aspect-video bg-gray-900 flex flex-col">
-            <div class="bg-green-900 text-black text-[10px] px-1 font-bold">CAM_01 // LCC_MOUTH</div>
-            <img id="cam-1" src="https://via.placeholder.com/400x225?text=WAITING_FOR_KEY" class="w-full grayscale opacity-50">
-        </div>
-        <div class="border border-green-900 aspect-video bg-gray-900 flex flex-col">
-            <div class="bg-green-900 text-black text-[10px] px-1 font-bold">CAM_02 // BCC_S_CURVE</div>
-            <img id="cam-2" src="https://via.placeholder.com/400x225?text=WAITING_FOR_KEY" class="w-full grayscale opacity-50">
-        </div>
-        </div>
-</div>   
+    <div class="mt-6 border border-green-900 bg-black p-6">
+        <h3 class="text-xl mb-4 underline decoration-green-700 uppercase tracking-widest text-white">Canyon_Surveillance_V3.0</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+            <div class="border border-green-900 aspect-video bg-gray-900 flex flex-col">
+                <div class="bg-green-900 text-black text-[10px] px-1 font-bold">CAM_01 // LCC_MOUTH</div>
+                <img id="cam-1" src="https://placehold.co/400x225/000000/00ff41?text=WAITING_FOR_DATA" class="w-full grayscale opacity-50">
+            </div>
+            <div class="border border-green-900 aspect-video bg-gray-900 flex flex-col">
+                <div class="bg-green-900 text-black text-[10px] px-1 font-bold">CAM_02 // BCC_S_CURVE</div>
+                <img id="cam-2" src="https://placehold.co/400x225/000000/00ff41?text=WAITING_FOR_DATA" class="w-full grayscale opacity-50">
             </div>
         </div>
-
     </div>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
-        // 1. Initialize Map with DARK MODE tiles
+        // 1. Initialize Map
         var map = L.map('map').setView([40.60, -111.75], 11);
-        
-        // Use CartoDB Dark Matter tiles for that "Cyberpunk" look
         L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
             attribution: '© OpenStreetMap & CartoDB',
-            subdomains: 'abcd',
             maxZoom: 19
         }).addTo(map);
-        
-        // 2. Draw the Canyon Roads (Polylines)
-        // Little Cottonwood (SR-210) Coordinates [Lat, Lng]
-        var lccRoute = [
-            [40.573, -111.795], // Mouth
-            [40.576, -111.770],
-            [40.589, -111.666], // Snowbird
-            [40.584, -111.649]  // Alta
-        ];
-        
-        // Big Cottonwood (SR-190) Coordinates
-        var bccRoute = [
-            [40.619, -111.787], // Mouth
-            [40.638, -111.724], // S-Curve
-            [40.605, -111.594], // Solitude
-            [40.601, -111.583]  // Brighton
-        ];
 
-        // Add lines to map
-        var lccPoly = L.polyline(lccRoute, {color: 'red', weight: 4, opacity: 0.7}).addTo(map).bindPopup("Little Cottonwood (SR-210)");
-        var bccPoly = L.polyline(bccRoute, {color: 'blue', weight: 4, opacity: 0.7}).addTo(map).bindPopup("Big Cottonwood (SR-190)");
+        // 2. Snowplow Logic
+        const plowIcon = L.icon({
+            iconUrl: 'https://img.icons8.com/ios-filled/50/ff6600/snowplow.png', 
+            iconSize: [30, 30],
+            iconAnchor: [15, 15]
+        });
+        let plowLayer = L.layerGroup().addTo(map);
 
-        // 3. The Logic to Fetch Data
+        function updatePlows(plowData) {
+            plowLayer.clearLayers();
+            if (!plowData || !Array.isArray(plowData)) return;
+            plowData.forEach(plow => {
+                L.marker([plow.Latitude, plow.Longitude], { icon: plowIcon })
+                 .bindPopup(`<b>VEHICLE: ${plow.VehicleID}</b><br>STATUS: ${plow.Status || 'ACTIVE'}`)
+                 .addTo(plowLayer);
+            });
+        }
+        
+        // 3. Polylines
+        var lccRoute = [[40.573, -111.795], [40.576, -111.770], [40.589, -111.666], [40.584, -111.649]];
+        var bccRoute = [[40.619, -111.787], [40.638, -111.724], [40.605, -111.594], [40.601, -111.583]];
+        var lccPoly = L.polyline(lccRoute, {color: 'red', weight: 4, opacity: 0.7}).addTo(map);
+        var bccPoly = L.polyline(bccRoute, {color: 'blue', weight: 4, opacity: 0.7}).addTo(map);
+
+        // 4. Initialize Chart (Placeholder Data)
+        const ctx = document.getElementById('trafficChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['-1h', '-45m', '-30m', '-15m', 'NOW'],
+                datasets: [{
+                    label: 'LCC (SR-210)',
+                    data: [45, 60, 55, 50, 55],
+                    borderColor: '#ff0000',
+                    tension: 0.4
+                }, {
+                    label: 'BCC (SR-190)',
+                    data: [22, 30, 35, 32, 35],
+                    borderColor: '#00ff41',
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: { ticks: { color: '#00ff41' } },
+                    x: { ticks: { color: '#00ff41' } }
+                }
+            }
+        });
+
+        // 5. Main Update Function
         async function updateDashboard() {
             try {
                 const response = await fetch('data.json?t=' + new Date().getTime());
-                if (!response.ok) throw new Error("Data file not found");
                 const data = await response.json();
-
-                // Update Text
                 document.getElementById('lcc-time').innerText = data.lcc_travel_time || "--";
                 document.getElementById('bcc-time').innerText = data.bcc_travel_time || "--";
-                
-                // Update Status & Colors
                 updateStatus('lcc-status', data.lcc_status, lccPoly);
                 updateStatus('bcc-status', data.bcc_status, bccPoly);
-                
+                updatePlows(data.plows); // TRIGGERS PLOWS
                 document.getElementById('last-update').innerText = "LAST_SYNC: " + (data.last_updated || "UNKNOWN");
-
-                // --- traffic chart update (inside updateDashboard after DOM updates) ---
-                if (window.trafficChart) {
-                    try {
-                        const chart = window.trafficChart;
-                        // Convert values to numbers (or null if missing)
-                        const lccVal = data.lcc_travel_time !== undefined ? Number(data.lcc_travel_time) : null;
-                        const bccVal = data.bcc_travel_time !== undefined ? Number(data.bcc_travel_time) : null;
-
-                        // Maintain a fixed number of points (7 in this example)
-                        const maxPoints = 7;
-
-                        // If labels array not set or shorter than expected, initialize
-                        if (!Array.isArray(chart.data.labels) || chart.data.labels.length === 0) {
-                            chart.data.labels = Array(maxPoints).fill('');
-                        }
-
-                        // Shift/append label (use current time or "NOW")
-                        if (chart.data.labels.length >= maxPoints) chart.data.labels.shift();
-                        chart.data.labels.push(new Date().toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'}));
-
-                        // Ensure datasets exist
-                        if (!chart.data.datasets[0]) chart.data.datasets[0] = { data: [] };
-                        if (!chart.data.datasets[1]) chart.data.datasets[1] = { data: [] };
-
-                        // LCC dataset
-                        if (chart.data.datasets[0].data.length >= maxPoints) chart.data.datasets[0].data.shift();
-                        chart.data.datasets[0].data.push(lccVal);
-
-                        // BCC dataset
-                        if (chart.data.datasets[1].data.length >= maxPoints) chart.data.datasets[1].data.shift();
-                        chart.data.datasets[1].data.push(bccVal);
-
-                        chart.update();
-                    } catch (e) {
-                        console.warn('Failed to update trafficChart:', e);
-                    }
-                }
-
-            } catch (error) {
-                console.log("Waiting for data...");
-            }
+            } catch (error) { console.log("System Status: Waiting for live data stream..."); }
         }
 
         function updateStatus(elementId, status, mapPolyline) {
             const el = document.getElementById(elementId);
             el.innerText = status || "UNKNOWN";
-            
-            // Reset classes
             el.className = "px-2 py-1 font-bold text-sm tracking-widest border border-gray-600";
-            
-            // Logic for Colors (Status Box AND Map Line)
             if (status === "OPEN" || status === "Clear") {
                 el.classList.add("bg-green-900", "text-white");
-                mapPolyline.setStyle({color: '#00ff41'}); // Green Line
+                mapPolyline.setStyle({color: '#00ff41'}); 
             } else if (status === "DELAY" || status === "Heavy") {
                 el.classList.add("bg-yellow-600", "text-black");
-                mapPolyline.setStyle({color: 'yellow'}); // Yellow Line
+                mapPolyline.setStyle({color: 'yellow'}); 
             } else if (status === "CLOSED" || status === "RESTRICTED") {
                 el.classList.add("bg-red-900", "text-white");
-                mapPolyline.setStyle({color: 'red'}); // Red Line
+                mapPolyline.setStyle({color: 'red'}); 
             } else {
                 el.classList.add("bg-gray-800", "text-gray-400");
                 mapPolyline.setStyle({color: 'gray'});
@@ -228,93 +190,26 @@
 
         setInterval(updateDashboard, 60000);
         updateDashboard();
-        // Mock Social Data Generator
-        const mockTweets = [
-            { user: "@UDOTcottonwoods", time: "2m ago", text: "🚧 LCC Road Update: Traction law in effect. 4x4 or chains required." },
-            { user: "@SkiBum99", time: "15m ago", text: "Just passed the mouth of BCC. Traffic is moving but slow. #powday" },
-            { user: "@AltaCentral", time: "1h ago", text: "Interlodge is currently in effect. No travel allowed outdoors." },
-            { user: "@WasatchSnow", time: "3h ago", text: "12 inches of new snow overnight! ❄️" }
-        ];
+        loadSocialFeed();
 
         function loadSocialFeed() {
+            const mockTweets = [
+                { user: "@UDOTcottonwoods", time: "2m ago", text: "🚧 LCC Road Update: Traction law in effect." },
+                { user: "@SkiBum99", time: "15m ago", text: "Traffic is moving but slow. #powday" }
+            ];
             const feedContainer = document.getElementById('social-feed');
-            feedContainer.innerHTML = ""; // Clear "Scanning..." message
-
+            feedContainer.innerHTML = ""; 
             mockTweets.forEach(post => {
-                const postHTML = `
+                feedContainer.innerHTML += `
                     <div class="border-l-2 border-green-900 pl-3 py-1">
                         <div class="flex justify-between items-baseline mb-1">
                             <span class="text-green-500 font-bold text-xs">${post.user}</span>
                             <span class="text-[10px] text-gray-600">${post.time}</span>
                         </div>
-                        <p class="text-xs text-gray-300 leading-relaxed font-sans">${post.text}</p>
-                    </div>
-                `;
-                feedContainer.innerHTML += postHTML;
+                        <p class="text-xs text-gray-300 font-sans">${post.text}</p>
+                    </div>`;
             });
         }
-
-        // Call this once on load
-        loadSocialFeed();
-
-        // --------------- Chart Initialization (Traffic Trend) ----------------
-        // 1. Initialize the Chart
-        try {
-            if (document.getElementById('trafficChart')) {
-                const ctx = document.getElementById('trafficChart').getContext('2d');
-                let trafficChart = new Chart(ctx, {
-                    type: 'line',
-                    data: {
-                        labels: ['-2h', '-90m', '-1h', '-45m', '-30m', '-15m', 'NOW'], // Placeholder labels
-                        datasets: [{
-                            label: 'LCC (SR-210)',
-                            data: [20, 25, 45, 60, 55, 50, 55], // Placeholder data
-                            borderColor: '#ff0000',
-                            backgroundColor: 'rgba(255, 0, 0, 0.1)',
-                            borderWidth: 2,
-                            tension: 0.4
-                        }, {
-                            label: 'BCC (SR-190)',
-                            data: [15, 18, 22, 30, 35, 32, 35], // Placeholder data
-                            borderColor: '#00ff41',
-                            backgroundColor: 'rgba(0, 255, 65, 0.1)',
-                            borderWidth: 2,
-                            tension: 0.4
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        scales: {
-                            y: {
-                                beginAtZero: true,
-                                grid: { color: '#1a1a1a' },
-                                ticks: { color: '#00ff41', font: { family: 'monospace' } }
-                            },
-                            x: {
-                                grid: { display: false },
-                                ticks: { color: '#00ff41', font: { family: 'monospace' } }
-                            }
-                        },
-                        plugins: {
-                            legend: {
-                                labels: { color: '#00ff41', font: { family: 'monospace' } }
-                            }
-                        }
-                    }
-                });
-                // Make it globally accessible for updates
-                window.trafficChart = trafficChart;
-            }
-        } catch (e) {
-            console.warn("Chart initialization failed:", e);
-        }
-
-        // Force Leaflet map and Chart to recalculate sizes after render
-        setTimeout(() => {
-          try { map.invalidateSize(); } catch (e) { /* ignore */ }
-          try { if (window.trafficChart) window.trafficChart.resize(); } catch(e) { }
-        }, 300);
     </script>
 </body>
 </html>
