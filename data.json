@@ -1,5 +1,7 @@
 {
-  "bcc_status": "Clear",
-  "lcc_status": "Clear",
-  "last_updated": "Waiting for first run..."
+  "bcc_status": "OPEN",
+  "lcc_status": "DELAY",
+  "bcc_travel_time": "35",
+  "lcc_travel_time": "55",
+  "last_updated": "SIMULATION_MODE"
 }
