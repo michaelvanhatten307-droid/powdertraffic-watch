@@ -1,21 +1,55 @@
+
 name: Update Traffic Data
+
 on:
   schedule:
-    - cron: '*/15 * * * *' # Runs every 15 minutes
-  workflow_dispatch:      # Allows you to click a button to run it manually
+    - cron: '*/15 * * * *'  # Every 15 minutes (UTC)
+  workflow_dispatch:        # Manual trigger
+
+permissions:
+  contents: write           # Needed to push commits using GITHUB_TOKEN
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Run Update
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true  # Uses GITHUB_TOKEN for pushes
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
         run: |
-          # This is where your Python code will eventually go
-          date > last_run.txt 
-      - name: Commit changes
+          python -m pip install --upgrade pip
+          # If you have a requirements.txt, use it; otherwise install what you need here
+          if [ -f requirements.txt ]; then
+            pip install -r requirements.txt
+          else
+            pip install requests python-dotenv
+          fi
+
+      - name: Run update script
+        env:
+          UDOT_API_KEY: ${{ secrets.UDOT_API_KEY }}  # Inject secret
         run: |
-          git config --global user.name "TrafficBot"
-          git config --global user.email "bot@powdertraffic.com"
-          git add .
-          git commit -m "Auto-update traffic" || exit 0
-          git push
+          # Example: run your Python updater
+          # Replace `scripts/update_udot.py` with your actual script path
+          python scripts/update_udot.py
+
+      - name: Commit changes (if any)
+        run: |
+          git config user.name "TrafficBot"
+          git config user.email "bot@powdertraffic.com"
+          # Only commit when there are changes
+          if ! git diff --quiet; then
+            git add -A
+            git commit -m "Auto-update traffic ($(date -u +'%Y-%m-%d %H:%M:%S UTC'))"
+            git push
+          else
+            echo "No changes to commit."
+          fi
