@@ -37,7 +37,7 @@ jobs:
         env:
           UDOT_API_KEY: ${{ secrets.UDOT_API_KEY }}  # Inject secret from GitHub
         run: |
-          python fetch_data.py
+          python scripts fetch_data.py
 
       - name: Commit changes (if any)
         run: |
