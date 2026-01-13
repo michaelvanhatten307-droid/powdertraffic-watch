@@ -3,5 +3,13 @@
   "lcc_status": "DELAY",
   "bcc_travel_time": "35",
   "lcc_travel_time": "55",
-  "last_updated": "SIMULATION_MODE"
+  "last_updated": "SIMULATION_MODE",
+  "plows": [
+    {
+      "VehicleID": "PLOW_6152",
+      "Latitude": 40.573,
+      "Longitude": -111.795,
+      "Status": "PLOWING"
+    }
+  ]
 }
