@@ -165,3 +165,19 @@ def process_cottonwoods():
         "data/BCC_cameras.json": bcc_cams,
         "data/summary.json": {
             "timestamp_utc": ts,
+            "LCC": {"conditions": len(lcc_cond), "events": len(lcc_evts), "cameras": len(lcc_cams)},
+            "BCC": {"conditions": len(bcc_cond), "events": len(bcc_evts), "cameras": len(bcc_cams)},
+        }
+    }
+
+    for path, payload in outputs.items():
+        with open(path, "w", encoding="utf-8") as f:
+            json.dump(payload, f, indent=2)
+
+    with open("last_run.txt", "w") as f:
+        f.write(f"Last run: {ts}\n")
+
+    print(json.dumps(outputs["data/summary.json"], indent=2))
+
+if __name__ == "__main__":
+    process_cottonwoods()
