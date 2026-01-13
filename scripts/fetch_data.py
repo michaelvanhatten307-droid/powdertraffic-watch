@@ -2,7 +2,7 @@ import requests
 import json
 import os
 
-API_KEY = os.environ.get('UDOT_API_KEY')
+API_KEY = os.environ.get('0a63926dde414fa2b2477ce76aa134de')
 # Official UDOT Base URL from your research
 BASE_URL = "https://www.udottraffic.utah.gov/api/v2"
 
