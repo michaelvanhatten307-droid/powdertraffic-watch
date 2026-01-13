@@ -72,68 +72,81 @@
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
-        // 1. Initialize Map
+        // 1. Initialize Map with DARK MODE tiles
         var map = L.map('map').setView([40.60, -111.75], 11);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '© OpenStreetMap'
+        
+        // Use CartoDB Dark Matter tiles for that "Cyberpunk" look
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+            attribution: '© OpenStreetMap & CartoDB',
+            subdomains: 'abcd',
+            maxZoom: 19
         }).addTo(map);
         
-        // Add markers
-        L.marker([40.57, -111.79]).addTo(map).bindPopup('Little Cottonwood (LCC)');
-        L.marker([40.62, -111.78]).addTo(map).bindPopup('Big Cottonwood (BCC)');
+        // 2. Draw the Canyon Roads (Polylines)
+        // Little Cottonwood (SR-210) Coordinates [Lat, Lng]
+        var lccRoute = [
+            [40.573, -111.795], // Mouth
+            [40.576, -111.770],
+            [40.589, -111.666], // Snowbird
+            [40.584, -111.649]  // Alta
+        ];
+        
+        // Big Cottonwood (SR-190) Coordinates
+        var bccRoute = [
+            [40.619, -111.787], // Mouth
+            [40.638, -111.724], // S-Curve
+            [40.605, -111.594], // Solitude
+            [40.601, -111.583]  // Brighton
+        ];
 
-        // 2. The Logic to Fetch Data
+        // Add lines to map
+        var lccPoly = L.polyline(lccRoute, {color: 'red', weight: 4, opacity: 0.7}).addTo(map).bindPopup("Little Cottonwood (SR-210)");
+        var bccPoly = L.polyline(bccRoute, {color: 'blue', weight: 4, opacity: 0.7}).addTo(map).bindPopup("Big Cottonwood (SR-190)");
+
+        // 3. The Logic to Fetch Data
         async function updateDashboard() {
             try {
-                // Add timestamp to prevent browser caching old data
                 const response = await fetch('data.json?t=' + new Date().getTime());
-                
-                if (!response.ok) {
-                    throw new Error("Data file not found yet");
-                }
-
+                if (!response.ok) throw new Error("Data file not found");
                 const data = await response.json();
 
-                // Update Times
+                // Update Text
                 document.getElementById('lcc-time').innerText = data.lcc_travel_time || "--";
                 document.getElementById('bcc-time').innerText = data.bcc_travel_time || "--";
-
-                // Update Status Text
-                const lccStatusEl = document.getElementById('lcc-status');
-                const bccStatusEl = document.getElementById('bcc-status');
-
-                lccStatusEl.innerText = data.lcc_status || "UNKNOWN";
-                bccStatusEl.innerText = data.bcc_status || "UNKNOWN";
                 
-                // Update Timestamp
+                // Update Status & Colors
+                updateStatus('lcc-status', data.lcc_status, lccPoly);
+                updateStatus('bcc-status', data.bcc_status, bccPoly);
+                
                 document.getElementById('last-update').innerText = "LAST_SYNC: " + (data.last_updated || "UNKNOWN");
-
-                // Dynamic Colors: Change background based on status
-                updateColor(lccStatusEl, data.lcc_status);
-                updateColor(bccStatusEl, data.bcc_status);
-
             } catch (error) {
-                console.log("System waiting for initial data...");
+                console.log("Waiting for data...");
             }
         }
 
-        // Helper to change colors
-        function updateColor(element, status) {
-            // Reset classes
-            element.className = "px-2 py-1 font-bold text-sm tracking-widest border border-gray-600";
+        function updateStatus(elementId, status, mapPolyline) {
+            const el = document.getElementById(elementId);
+            el.innerText = status || "UNKNOWN";
             
+            // Reset classes
+            el.className = "px-2 py-1 font-bold text-sm tracking-widest border border-gray-600";
+            
+            // Logic for Colors (Status Box AND Map Line)
             if (status === "OPEN" || status === "Clear") {
-                element.classList.add("bg-green-900", "text-white");
+                el.classList.add("bg-green-900", "text-white");
+                mapPolyline.setStyle({color: '#00ff41'}); // Green Line
             } else if (status === "DELAY" || status === "Heavy") {
-                element.classList.add("bg-yellow-600", "text-black");
+                el.classList.add("bg-yellow-600", "text-black");
+                mapPolyline.setStyle({color: 'yellow'}); // Yellow Line
             } else if (status === "CLOSED" || status === "RESTRICTED") {
-                element.classList.add("bg-red-900", "text-white");
+                el.classList.add("bg-red-900", "text-white");
+                mapPolyline.setStyle({color: 'red'}); // Red Line
             } else {
-                element.classList.add("bg-gray-800", "text-gray-400");
+                el.classList.add("bg-gray-800", "text-gray-400");
+                mapPolyline.setStyle({color: 'gray'});
             }
         }
 
-        // Run every 60 seconds
         setInterval(updateDashboard, 60000);
         updateDashboard(); 
     </script>
