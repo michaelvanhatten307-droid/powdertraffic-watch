@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PowderTraffic Watch</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        body { background-color: #0a0a0a; color: #00ff41; font-family: monospace; }
+        #map { height: 300px; border: 1px solid #333; }
+    </style>
+</head>
+<body class="p-4">
+    <header class="mb-8 border-b border-green-900 pb-4">
+        <h1 class="text-3xl font-bold tracking-tighter">POWDERTRAFFIC//WATCH_V1.0</h1>
+        <p id="clock">SYSTEM_STATUS: ACTIVE</p>
+    </header>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="border border-green-900 p-6 bg-black">
+            <h2 class="text-xl mb-4 underline">CANYON_STATUS</h2>
+            <div class="flex justify-between items-center mb-2">
+                <span>LITTLE COTTONWOOD (SR-210)</span>
+                <span class="px-2 py-1 bg-green-900 text-white font-bold">OPEN</span>
+            </div>
+            <div class="flex justify-between items-center">
+                <span>BIG COTTONWOOD (SR-190)</span>
+                <span class="px-2 py-1 bg-red-900 text-white font-bold">DELAY</span>
+            </div>
+        </div>
+
+        <div class="border border-green-900 bg-black overflow-hidden">
+            <div id="map"></div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        // Initialize Map centered on the Canyons
+        var map = L.map('map').setView([40.60, -111.75], 11);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap'
+        }).addTo(map);
+        
+        // Add markers for the Canyons
+        L.marker([40.57, -111.79]).addTo(map).bindPopup('Little Cottonwood');
+        L.marker([40.62, -111.78]).addTo(map).bindPopup('Big Cottonwood');
+    </script>
+</body>
+</html>
