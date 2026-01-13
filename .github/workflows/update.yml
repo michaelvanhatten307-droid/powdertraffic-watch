@@ -1,0 +1,21 @@
+name: Update Traffic Data
+on:
+  schedule:
+    - cron: '*/15 * * * *' # Runs every 15 minutes
+  workflow_dispatch:      # Allows you to click a button to run it manually
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run Update
+        run: |
+          # This is where your Python code will eventually go
+          date > last_run.txt 
+      - name: Commit changes
+        run: |
+          git config --global user.name "TrafficBot"
+          git config --global user.email "bot@powdertraffic.com"
+          git add .
+          git commit -m "Auto-update traffic" || exit 0
+          git push
