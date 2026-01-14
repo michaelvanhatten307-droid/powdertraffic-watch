@@ -5,8 +5,8 @@ from playwright.async_api import async_playwright
 
 # Exact Google Maps Directions: Park & Ride Lot -> Resort Base
 ROUTES = {
-    "lcc": "https://www.google.com/maps/dir/Little+Cottonwood+Canyon+Park+%26+Ride,+UT-210,+Salt+Lake+City,+UT/Alta+Ski+Area,+UT-210,+Alta,+UT",
-    "bcc": "https://www.google.com/maps/dir/Big+Cottonwood+Canyon+Park+%26+Ride,+6200+S,+Holladay,+UT/Brighton+Resort,+Utah+190,+Brighton,+UT"
+    "lcc": "https://www.google.com/maps/dir/Little+Cottonwood+Park+%26+Ride,+UT/Alta+Ski+Area,+UT",
+    "bcc": "https://www.google.com/maps/dir/Big+Cottonwood+Canyon+Park+%26+Ride,+UT/Brighton+Resort,+UT"
 }
 
 async def get_google_time(browser, url):
