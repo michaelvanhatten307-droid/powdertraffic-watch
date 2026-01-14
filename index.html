@@ -7,11 +7,10 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="https://unpkg.com/esri-leaflet@3.0.12/dist/esri-leaflet.js"></script>
     <style>
         body { background-color: #0a0a0a; color: #00ff41; font-family: 'Courier New', monospace; }
         #map { height: 100%; width: 100%; border: 1px solid #14532d; background: #000 !important; }
-        .leaflet-interactive { filter: drop-shadow(0 0 5px currentColor); }
+        .leaflet-interactive { filter: drop-shadow(0 0 8px currentColor); transition: stroke 0.5s ease; }
         @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
         .live-indicator { animation: pulse 2s infinite; }
         .camera-feed { transition: all 0.3s ease; border: 1px solid #14532d; background: #000; }
@@ -23,11 +22,11 @@
 <body class="p-4 max-w-6xl mx-auto">
     <header class="mb-8 border-b border-green-900 pb-4 flex justify-between items-end">
         <div>
-            <h1 class="text-2xl md:text-3xl font-bold tracking-tighter text-white">POWDERTRAFFIC//WATCH</h1>
-            <p class="text-xs text-green-600 tracking-[0.2em]">LIVE CANYON MONITORING SYSTEM // V3.0</p>
+            <h1 class="text-2xl md:text-3xl font-bold tracking-tighter text-white uppercase italic">Powdertraffic // Watch</h1>
+            <p class="text-xs text-green-600 tracking-[0.2em]">CANYON SURVEILLANCE V3.0</p>
         </div>
         <div class="text-right">
-            <p class="text-[10px] text-gray-400">SYSTEM_STATUS: <span class="text-green-500">ACTIVE</span></p>
+            <p class="text-[10px] text-gray-400">MAP_ENGINE: <span class="text-green-500">STABLE</span></p>
             <span class="live-indicator inline-block w-2 h-2 bg-red-500 rounded-full"></span>
         </div>
     </header>
@@ -35,29 +34,32 @@
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div class="border border-green-900 p-6 bg-black/50">
             <h2 class="text-xl mb-6 underline decoration-green-700 decoration-2 underline-offset-8 uppercase">Canyon_Status</h2>
+            
             <div class="flex justify-between items-center mb-8 border-b border-green-900/30 pb-6">
                 <div>
                     <p class="text-[10px] text-gray-500 mb-2 uppercase">SR-210 (LITTLE COTTONWOOD)</p>
                     <span id="lcc-status" class="px-3 py-1 bg-gray-800 text-gray-400 font-bold text-sm border border-gray-600">SYNCING...</span>
                 </div>
                 <div class="text-right">
-                    <p class="text-[10px] text-gray-500 mb-1 italic">EST_DRIVE_TIME</p>
-                    <span id="lcc-time" class="text-3xl font-bold text-white">--</span>
+                    <p class="text-[10px] text-gray-500 mb-1 italic uppercase">Est_Drive</p>
+                    <span id="lcc-time" class="text-3xl font-bold text-white tracking-tighter">--</span><span class="text-xs ml-1 text-green-700">MIN</span>
                 </div>
             </div>
+
             <div class="flex justify-between items-center mb-4">
                 <div>
                     <p class="text-[10px] text-gray-500 mb-2 uppercase">SR-190 (BIG COTTONWOOD)</p>
                     <span id="bcc-status" class="px-3 py-1 bg-gray-800 text-gray-400 font-bold text-sm border border-gray-600">SYNCING...</span>
                 </div>
                 <div class="text-right">
-                    <p class="text-[10px] text-gray-500 mb-1 italic">EST_DRIVE_TIME</p>
-                    <span id="bcc-time" class="text-3xl font-bold text-white">--</span>
+                    <p class="text-[10px] text-gray-500 mb-1 italic uppercase">Est_Drive</p>
+                    <span id="bcc-time" class="text-3xl font-bold text-white tracking-tighter">--</span><span class="text-xs ml-1 text-green-700">MIN</span>
                 </div>
             </div>
-            <p id="last-update" class="text-[10px] text-gray-600 mt-8 uppercase tracking-widest">INITIALIZING...</p>
+            <p id="last-update" class="text-[10px] text-gray-600 mt-8 uppercase tracking-widest">CONNECTING_TO_DATA_STREAM...</p>
         </div>
-        <div class="border border-green-900 bg-black p-1 h-80 relative">
+
+        <div class="border border-green-900 bg-black p-1 h-96 relative">
             <div id="map"></div>
         </div>
     </div>
@@ -68,72 +70,89 @@
     </div>
 
     <script>
-        // 1. Map Init
-        var map = L.map('map', { zoomControl: false, preferCanvas: true }).setView([40.62, -111.72], 11);
+        // 1. Map Setup
+        var map = L.map('map', { zoomControl: false }).setView([40.61, -111.70], 11);
         L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png').addTo(map);
 
-        // 2. Fallback Hardcoded Geometry (If ArcGIS fails)
-        const bccRoute = [[40.620,-111.789],[40.631,-111.745],[40.650,-111.665],[40.605,-111.583]];
-        const lccRoute = [[40.572,-111.795],[40.571,-111.715],[40.591,-111.633]];
-        
-        var bccFallback = L.polyline(bccRoute, {color: '#14532d', weight: 4, opacity: 0.5}).addTo(map);
-        var lccFallback = L.polyline(lccRoute, {color: '#14532d', weight: 4, opacity: 0.5}).addTo(map);
+        // 2. Tactical Route Geometry (Hardcoded GPS Paths - WILL NOT DISAPPEAR)
+        const bccCoords = [
+            [40.638, -111.808], [40.628, -111.777], [40.617, -111.748], [40.614, -111.722],
+            [40.627, -111.688], [40.643, -111.666], [40.655, -111.636], [40.641, -111.597],
+            [40.603, -111.583], [40.598, -111.583]
+        ];
+        const lccCoords = [
+            [40.575, -111.805], [40.572, -111.780], [40.568, -111.748], [40.568, -111.713],
+            [40.574, -111.681], [40.583, -111.656], [40.589, -111.638], [40.588, -111.594]
+        ];
 
-        // 3. ArcGIS Layer Attempt
-        const udotUrl = "https://services.arcgis.com/pA2nEVnB6tquxgOW/arcgis/rest/services/UDOT_Routes_ALRS/FeatureServer/0";
-        var bccArc = L.esri.featureLayer({ url: udotUrl, where: "LABEL = '190'", style: () => ({ color: '#00ff41', weight: 8 }) }).addTo(map);
-        var lccArc = L.esri.featureLayer({ url: udotUrl, where: "LABEL = '210'", style: () => ({ color: '#00ff41', weight: 8 }) }).addTo(map);
-
-        // If ArcGIS loads, hide the fallbacks
-        bccArc.on('load', () => map.removeLayer(bccFallback));
-        lccArc.on('load', () => map.removeLayer(lccFallback));
+        var bccLine = L.polyline(bccCoords, { color: '#14532d', weight: 8, opacity: 0.9, lineJoin: 'round' }).addTo(map);
+        var lccLine = L.polyline(lccCoords, { color: '#14532d', weight: 8, opacity: 0.9, lineJoin: 'round' }).addTo(map);
 
         let cameraLayer = L.layerGroup().addTo(map);
 
+        // 3. Update Function
         async function updateDashboard() {
             try {
                 const response = await fetch('data.json?t=' + new Date().getTime());
                 const data = await response.json();
 
-                updateStatus('lcc-status', data.canyons.lcc.status, lccArc, lccFallback);
-                updateStatus('bcc-status', data.canyons.bcc.status, bccArc, bccFallback);
+                updateStatus('lcc-status', data.canyons.lcc.status, lccLine);
+                updateStatus('bcc-status', data.canyons.bcc.status, bccLine);
 
                 if (data.drive_times) {
-                    document.getElementById('lcc-time').innerText = (data.drive_times.lcc || "--") + "m";
-                    document.getElementById('bcc-time').innerText = (data.drive_times.bcc || "--") + "m";
+                    document.getElementById('lcc-time').innerText = data.drive_times.lcc || "--";
+                    document.getElementById('bcc-time').innerText = data.drive_times.bcc || "--";
                 }
+                
                 document.getElementById('last-update').innerText = "LAST_SYNC: " + data.metadata.last_updated;
                 updateCameraSystem(data.cameras);
-            } catch (e) { console.log("JSON_OFFLINE"); }
+
+            } catch (error) {
+                console.log("WAITING_FOR_DATA...");
+            }
         }
 
-        function updateStatus(id, status, arc, fallback) {
+        function updateStatus(id, status, line) {
             const el = document.getElementById(id);
             el.innerText = status.toUpperCase();
-            let color = status.includes("Dry") ? '#00ff41' : (status.includes("Wet") ? '#fbbf24' : '#ef4444');
             
-            el.className = `px-3 py-1 font-bold text-sm border uppercase ${status.includes("Dry") ? 'bg-green-900/20 text-[#00ff41] border-[#00ff41]' : (status.includes("Wet") ? 'bg-yellow-900/20 text-yellow-400 border-yellow-500' : 'bg-red-900/20 text-red-500 border-red-500')}`;
+            let color = '#444';
+            if (status.includes("Dry") || status.includes("Clear")) color = '#00ff41';
+            else if (status.includes("Wet") || status.includes("Fair")) color = '#fbbf24';
+            else color = '#ef4444';
+
+            // Change UI colors
+            el.className = `px-3 py-1 font-bold text-sm border uppercase ${color === '#00ff41' ? 'bg-green-900/20 text-[#00ff41] border-[#00ff41]' : (color === '#fbbf24' ? 'bg-yellow-900/20 text-yellow-400 border-yellow-500' : 'bg-red-900/20 text-red-500 border-red-500')}`;
             
-            arc.setStyle({ color: color });
-            fallback.setStyle({ color: color, opacity: 0.8 });
+            // Update the Permanent Line color
+            line.setStyle({ color: color });
         }
 
-        function updateCameraSystem(cams) {
+        function updateCameraSystem(cameras) {
             cameraLayer.clearLayers();
-            const grid = document.getElementById('cam-grid'); grid.innerHTML = "";
-            cams.forEach((cam, i) => {
-                L.circleMarker([cam.lat, cam.lng], { radius: 6, fillColor: "#00ff41", color: "#000", weight: 2, fillOpacity: 1 }).addTo(cameraLayer);
-                if (i < 4) {
-                    grid.innerHTML += `<div class="camera-feed p-1 group">
-                        <div class="bg-green-900 text-black text-[9px] px-2 py-1 font-bold flex justify-between">
-                            <span>${cam.name}</span><span>● LIVE</span>
-                        </div>
-                        <img src="${cam.image}" referrerpolicy="no-referrer" class="w-full grayscale group-hover:grayscale-0">
-                    </div>`;
+            const grid = document.getElementById('cam-grid');
+            grid.innerHTML = ""; 
+
+            cameras.forEach((cam, index) => {
+                L.circleMarker([cam.lat, cam.lng], {
+                    radius: 5, fillColor: "#00ff41", color: "#000", weight: 2, fillOpacity: 1
+                }).bindPopup(`<div style="color:#00ff41; background:#000; padding:5px; border:1px solid #00ff41;"><b>${cam.name}</b><br><img src="${cam.image}" width="200" style="margin-top:5px;"></div>`).addTo(cameraLayer);
+
+                if (index < 4) {
+                    grid.innerHTML += `
+                        <div class="camera-feed p-1 group">
+                            <div class="bg-green-900/80 text-black text-[9px] px-2 py-1 font-bold flex justify-between uppercase">
+                                <span>${cam.name}</span>
+                                <span class="group-hover:text-white">● LIVE</span>
+                            </div>
+                            <img src="${cam.image}" referrerpolicy="no-referrer" class="w-full grayscale hover:grayscale-0 transition-all duration-300">
+                        </div>`;
                 }
             });
         }
-        setInterval(updateDashboard, 30000); updateDashboard();
+
+        setInterval(updateDashboard, 30000);
+        updateDashboard();
     </script>
 </body>
 </html>
