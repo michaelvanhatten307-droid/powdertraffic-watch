@@ -268,5 +268,9 @@
       "route": "BCC"
     }
   ],
-  "plows": []
+  "plows": [],
+  "drive_times": {
+    "lcc": "--",
+    "bcc": "--"
+  }
 }
