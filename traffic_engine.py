@@ -6,8 +6,8 @@ from playwright.async_api import async_playwright
 # Google Maps Directions (Mouth of Canyon to Resorts)
 # These URLs are pre-configured for the fastest driving route
 ROUTES = {
-    "lcc": "https://www.google.com/maps/dir/40.575,-111.805/Alta+Ski+Area,+Utah",
-    "bcc": "https://www.google.com/maps/dir/40.638,-111.808/Brighton+Resort,+Utah"
+    "lcc": "https://www.google.com/maps/dir/40.5721,-111.7761/Alta+Ski+Area,+Utah/@40.5818,-111.7088,13z/",
+    "bcc": "https://www.google.com/maps/dir/40.6196,-111.7892/Brighton+Resort,+Utah/@40.6133,-111.6872,12z/"
 }
 
 async def get_google_time(browser, url):
