@@ -1,71 +1,74 @@
 import json
 import asyncio
+import re
 from datetime import datetime
 from playwright.async_api import async_playwright
 
-# REAL GOOGLE MAPS LINKS (Mouth of Canyon to Resort)
-# I have provided the coordinate-based URLs for maximum accuracy
+# Precise Coordinates: Mouth of Canyon -> Resort Base
 ROUTES = {
-    "lcc": "https://www.google.com/maps/dir/40.5730,-111.7761/40.5888,-111.6370/",
-    "bcc": "https://www.google.com/maps/dir/40.6200,-111.7890/40.5990,-111.5830/"
+    "lcc": "https://www.google.com/maps/dir/40.5721,-111.7761/40.5888,-111.6380/",
+    "bcc": "https://www.google.com/maps/dir/40.6197,-111.7893/40.5992,-111.5835/"
 }
 
 async def get_google_time(browser, url):
-    # Spoof a real browser to avoid "Are you a robot?" checks
     context = await browser.new_context(
-        user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+        user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
     )
     page = await context.new_page()
     
     try:
-        # 1. Faster Navigation: wait for the DOM, not the heavy map images
+        # Navigate and wait for the page to actually have text
         await page.goto(url, wait_until="domcontentloaded", timeout=45000)
         
-        # 2. Handle Google Consent Popup (if it appears in the Cloud)
+        # 1. Handle the Cookie/Privacy Wall (Common in GitHub's Cloud IP)
         try:
-            for btn_text in ["Accept all", "I agree", "Agree"]:
-                button = page.get_by_role("button", name=btn_text)
-                if await button.is_visible():
-                    await button.click()
-                    break
+            # Look for "Accept all" button
+            accept = page.get_by_role("button", name=re.compile("Accept|Agree|Allow", re.IGNORECASE))
+            if await accept.is_visible():
+                await accept.click()
+                await page.wait_for_timeout(2000) # Short pause for transition
         except:
             pass
 
-        # 3. New aggressive selectors for the travel time duration
-        selectors = [
-            'div.Fk3vS',                 # Desktop primary time
-            'span.fontHeadlineSmall',    # Sidebar primary time
-            'div[aria-label*="minute"]', # Accessibility label
-            '.kdS68b',                   # Mobile duration
-            '.U39P9e'                    # List view duration
-        ]
+        # 2. Wait for the "Driving" icon to appear - this confirms the directions loaded
+        await page.wait_for_selector('img[src*="driving"], [aria-label*="Driving"]', timeout=15000)
         
-        for selector in selectors:
-            try:
-                # Wait for the specific element to pop in
-                element = await page.wait_for_selector(selector, timeout=12000)
-                if element:
-                    text = await element.inner_text()
-                    # We need "min" or "hr" in the text to know it's a time
-                    if "min" in text or "hr" in text:
-                        # Clean "24 min" -> "24"
-                        return text.split('\n')[0].replace('min', '').replace('s', '').strip()
-            except:
-                continue
+        # 3. BRUTE FORCE REGEX: Get the whole page text
+        # This looks for patterns like "24 min" or "1 hr 5 min"
+        content = await page.content()
+        
+        # Search for the "primary" time which usually appears first in the list
+        # Pattern looks for: a number followed by 'min'
+        found_times = re.findall(r'>(\d+)\s*min<', content)
+        
+        if not found_times:
+            # Fallback for "1 hr 10 min" format
+            hr_search = re.findall(r'>(\d+)\s*hr\s*(\d+)\s*min<', content)
+            if hr_search:
+                hrs, mins = hr_search[0]
+                return str(int(hrs) * 60 + int(mins))
+            
+            # Secondary fallback for simpler text structures
+            text_only = await page.evaluate("document.body.innerText")
+            found_times = re.findall(r'(\d+)\s*min', text_only)
+
+        if found_times:
+            # We take the first match as it's usually the "Best Route"
+            print(f"DEBUG: Found time {found_times[0]} for {url[:30]}...")
+            return found_times[0]
                 
         return "--"
     except Exception as e:
-        print(f"SCRAPE_ERROR for {url}: {e}")
+        print(f"SCRAPE_ERROR: {e}")
         return "--"
     finally:
         await page.close()
 
 async def main():
     async with async_playwright() as p:
-        # Launch with stability flags for GitHub Actions
         browser = await p.chromium.launch(
             headless=True, 
-            args=['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage']
+            args=['--no-sandbox', '--disable-setuid-sandbox']
         )
         
         print("LOG: STARTING_DRIVE_TIME_SYNC...")
@@ -73,25 +76,26 @@ async def main():
         bcc_val = await get_google_time(browser, ROUTES["bcc"])
         
         try:
-            # 1. Read existing data (protect your cameras!)
+            # READ existing data.json
             with open('data.json', 'r') as f:
                 data = json.load(f)
             
-            # 2. Force Create/Update the drive_times block
+            # Create the block if missing
             if 'drive_times' not in data:
-                data['drive_times'] = {}
+                data['drive_times'] = {"lcc": "--", "bcc": "--"}
                 
+            # Only update if we actually got a number
             data['drive_times']['lcc'] = lcc_val
             data['drive_times']['bcc'] = bcc_val
             
-            # 3. Update the global timestamp
+            # Update Timestamp
             data['metadata']['last_updated'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-            # 4. Save back to data.json with nice formatting
+            # SAVE to data.json
             with open('data.json', 'w') as f:
                 json.dump(data, f, indent=4)
             
-            print(f"SYNC_SUCCESS: LCC({lcc_val}) BCC({bcc_val}) merged into data.json")
+            print(f"SYNC_SUCCESS: LCC({lcc_val}) BCC({bcc_val}) recorded.")
             
         except Exception as e:
             print(f"JSON_FILE_ERROR: {e}")
