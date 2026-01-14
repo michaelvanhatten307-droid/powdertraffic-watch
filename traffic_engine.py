@@ -28,12 +28,14 @@ async def get_google_time(browser, url):
         except:
             pass
 
-        # Selectors for the duration text
+       # selectors list:
         selectors = [
-            'span.fontHeadlineSmall', 
-            '.U39P9e', 
-            'div[aria-label*="minutes"]',
-            'div.section-directions-trip-duration'
+            'div.Fk3vS',                 # Desktop layout primary time
+            'span.fontHeadlineSmall',    # Sidebar layout primary time
+            '.kdS68b',                   # Mobile-style duration
+            'div[aria-label*="minute"]', # Accessibility label
+            'div.section-directions-trip-duration',
+            '.U39P9e'                    # Directions list duration
         ]
         
         for selector in selectors:
