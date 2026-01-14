@@ -10,69 +10,59 @@ def get_udot_data(endpoint):
     url = f"{BASE_URL}/{endpoint}?key={API_KEY}&format=json"
     try:
         response = requests.get(url)
-        # Fallback to CamelCase if lowercase fails
+        # Try CamelCase if lowercase fails (Common UDOT quirk)
         if response.status_code == 404:
-            url = f"{BASE_URL}/Get{endpoint.capitalize()}?key={API_KEY}&format=json"
+            alt_endpoint = "".join([word.capitalize() for word in endpoint.split('/')])
+            url = f"{BASE_URL}/{alt_endpoint}?key={API_KEY}&format=json"
             response = requests.get(url)
-        
+            
         response.raise_for_status()
-        return response.json()
+        data = response.json()
+        print(f"📡 API Success: Found {len(data)} total items for '{endpoint}'")
+        return data
     except Exception as e:
-        print(f"❌ Error fetching {endpoint}: {e}")
+        print(f"❌ API Error for {endpoint}: {e}")
         return []
 
 def process_canyons():
-    # 1. Road Conditions
+    # Endpoints based on UDOT v2 help docs
     conditions_data = get_udot_data("roadconditions")
-    bcc_status = next((i.get("RoadCondition") for i in conditions_data if "SR-190" in str(i.get("RoadwayName"))), "UNKNOWN")
-    lcc_status = next((i.get("RoadCondition") for i in conditions_data if "SR-210" in str(i.get("RoadwayName"))), "UNKNOWN")
-
-    # 2. Alerts (New Section)
-    # Ref: https://prod-ut.ibi511.com/help/endpoint/alerts
     alert_data = get_udot_data("alerts")
-    canyon_alerts = []
-    for a in alert_data:
-        text = str(a.get("FullText", ""))
-        # We search the alert text for canyon identifiers
-        if any(id in text for id in ["SR-190", "SR-210", "Big Cottonwood", "Little Cottonwood"]):
-            canyon_alerts.append({
-                "id": a.get("Id"),
-                "headline": a.get("Headline"),
-                "text": text,
-                "severity": a.get("Severity"), # e.g., "Major", "Minor"
-                "start": a.get("StartTime"),
-                "category": a.get("CategoryName") # e.g., "Road Weather Alert" or "Incident"
-            })
-
-    # 3. Cameras
     camera_data = get_udot_data("cameras")
-    canyon_cameras = []
-    for cam in camera_data:
-        road = str(cam.get("RoadwayName", ""))
-        if "SR-190" in road or "SR-210" in road:
-            canyon_cameras.append({
-                "id": cam.get("Id"),
-                "name": cam.get("Name"),
-                "lat": cam.get("Latitude"),
-                "lng": cam.get("Longitude"),
-                "view_url": cam.get("ViewUrl")
-            })
-
-    # 4. Snowplows (Service Vehicles)
     plow_data = get_udot_data("servicevehicles")
-    plow_list = []
-    for p in plow_data:
-        route = str(p.get("RouteName", ""))
-        if "SR-190" in route or "SR-210" in route:
-            plow_list.append({
-                "id": p.get("Id"),
-                "vehicle_number": p.get("VehicleNumber"),
-                "lat": p.get("Latitude"),
-                "lng": p.get("Longitude"),
-                "speed": p.get("Speed"),
-                "heading": p.get("Heading"),
-                "plow_status": p.get("CurrentStatus")
-            })
+
+    bcc_status = "UNKNOWN"
+    lcc_status = "UNKNOWN"
+    
+    # Check Road Conditions
+    for i in conditions_data:
+        roadway = str(i.get("RoadwayName", ""))
+        # We use flexible matching: if '190' is in 'SR-190' or 'Big Cottonwood'
+        if "190" in roadway or "Big Cottonwood" in roadway:
+            bcc_status = i.get("RoadCondition", "UNKNOWN")
+        if "210" in roadway or "Little Cottonwood" in roadway:
+            lcc_status = i.get("RoadCondition", "UNKNOWN")
+
+    # Filter Alerts
+    canyon_alerts = [
+        {"text": a.get("FullText"), "severity": a.get("Severity")}
+        for a in alert_data 
+        if any(term in str(a.get("FullText", "")) for term in ["190", "210", "Cottonwood"])
+    ]
+
+    # Filter Cameras
+    canyon_cameras = [
+        {"name": c.get("Name"), "lat": c.get("Latitude"), "lng": c.get("Longitude"), "url": c.get("ViewUrl")}
+        for c in camera_data 
+        if any(term in str(c.get("RoadwayName", "")) for term in ["190", "210"])
+    ]
+
+    # Filter Plows
+    canyon_plows = [
+        {"id": p.get("VehicleNumber"), "lat": p.get("Latitude"), "lng": p.get("Longitude"), "status": p.get("CurrentStatus")}
+        for p in plow_data 
+        if any(term in str(p.get("RouteName", "")) for term in ["190", "210"])
+    ]
 
     return {
         "last_updated": datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ"),
@@ -80,11 +70,11 @@ def process_canyons():
         "lcc_status": lcc_status,
         "alerts": canyon_alerts,
         "cameras": canyon_cameras,
-        "plows": plow_list
+        "plows": canyon_plows
     }
 
 if __name__ == "__main__":
-    data = process_canyons()
+    results = process_canyons()
     with open("data.json", "w") as f:
-        json.dump(data, f, indent=2)
-    print(f"✅ Success! Found {len(data['alerts'])} alerts, {len(data['cameras'])} cameras, and {len(data['plows'])} plows.")
+        json.dump(results, f, indent=2)
+    print("✅ data.json written.")
