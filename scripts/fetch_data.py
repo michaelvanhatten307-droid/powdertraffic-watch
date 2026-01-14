@@ -19,60 +19,63 @@ def get_udot_data(endpoint):
         return []
 
 def process_canyons():
-    # 1. Fetch data
     conditions_data = get_udot_data("roadconditions")
     camera_data = get_udot_data("cameras")
     plow_data = get_udot_data("servicevehicles") 
     alert_data = get_udot_data("alerts")
 
-    # 2. Road Conditions
     bcc_status, lcc_status = "UNKNOWN", "UNKNOWN"
+    
+    # 1. Road Conditions (Normalizing to Title Case for the Dashboard)
     for i in conditions_data:
-        # Check RoadwayName or Roadway
         road = str(i.get("RoadwayName", i.get("Roadway", "")))
+        condition = str(i.get("RoadCondition", "UNKNOWN")).title()
         if any(x in road for x in ["SR-190", "SR190", "Big Cottonwood"]):
-            bcc_status = i.get("RoadCondition", "UNKNOWN")
+            bcc_status = condition
         if any(x in road for x in ["SR-210", "SR210", "Little Cottonwood"]):
-            lcc_status = i.get("RoadCondition", "UNKNOWN")
+            lcc_status = condition
 
-    # 3. Filter Cameras (Checking multiple keys: Roadway, Name, and Location)
+    # 2. Filter Cameras (Fixing the Null URL issue)
     canyon_cameras = []
     for c in camera_data:
-        # Combine all name-related fields into one string to search
         search_blob = f"{c.get('Roadway', '')} {c.get('Name', '')} {c.get('Location', '')}"
+        
+        # Check if it's one of our canyons
+        route = None
         if any(x in search_blob for x in ["SR-190", "SR190", "Big Cottonwood"]):
-            canyon_cameras.append({
-                "id": c.get("Id"),
-                "name": c.get("Name", c.get("Location")),
-                "lat": c.get("Latitude"),
-                "lng": c.get("Longitude"),
-                "url": c.get("ViewUrl"),
-                "route": "BCC"
-            })
+            route = "BCC"
         elif any(x in search_blob for x in ["SR-210", "SR210", "Little Cottonwood"]):
+            route = "LCC"
+            
+        if route:
+            # Reach into the 'Views' list to get the actual image URL
+            views = c.get("Views", [])
+            image_url = views[0].get("Url") if views else None
+            
             canyon_cameras.append({
                 "id": c.get("Id"),
-                "name": c.get("Name", c.get("Location")),
+                "name": str(c.get("Name", c.get("Location"))).strip(),
                 "lat": c.get("Latitude"),
                 "lng": c.get("Longitude"),
-                "url": c.get("ViewUrl"),
-                "route": "LCC"
+                "url": image_url, # Now should be a real https link
+                "route": route
             })
 
-    # 4. Filter Snowplows (Searching RouteName)
+    # 3. Filter Snowplows
     canyon_plows = []
     for p in plow_data:
-        route = str(p.get("RouteName", ""))
-        if any(x in route for x in ["190", "210"]):
+        route_name = str(p.get("RouteName", ""))
+        if any(x in route_name for x in ["190", "210"]):
             canyon_plows.append({
                 "id": p.get("VehicleNumber"),
                 "lat": p.get("Latitude"),
                 "lng": p.get("Longitude"),
                 "status": p.get("CurrentStatus", "Active"),
-                "route": "BCC" if "190" in route else "LCC"
+                "speed": p.get("Speed", 0),
+                "route": "BCC" if "190" in route_name else "LCC"
             })
 
-    # 5. Filter Alerts
+    # 4. Filter Alerts
     canyon_alerts = []
     for a in alert_data:
         text = str(a.get("FullText", ""))
@@ -101,4 +104,4 @@ if __name__ == "__main__":
     final_results = process_canyons()
     with open("data.json", "w") as f:
         json.dump(final_results, f, indent=2)
-    print(f"✅ Success! Cameras found: {len(final_results['cameras'])}")
+    print(f"✅ Update complete. Found {len(final_results['cameras'])} cameras with valid URLs.")
