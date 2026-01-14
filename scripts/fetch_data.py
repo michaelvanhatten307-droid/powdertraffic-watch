@@ -67,7 +67,7 @@ def process_canyons():
             udot_url = views[0].get("Url") if views else f"https://www.udottraffic.utah.gov/map/Cctv/{camera_id}"
             
             # Direct S3 JPG link for dashboard display
-            image_url = f"https://s3.amazonaws.com/commuterlink-traffic-images/{camera_id}.jpg"
+            image_url = f"https://www.udottraffic.utah.gov/map/Cctv/{camera_id}?isSnapshot=true"
             
             canyon_cameras.append({
                 "id": camera_id,
