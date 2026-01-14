@@ -45,7 +45,7 @@ def process_canyons():
         if any(x in road for x in ["SR-210", "SR210", "Little Cottonwood"]):
             lcc_status = condition
 
-    # 3. Filter Cameras with Direct Image Links
+    # 3. Filter Cameras with Direct Image Links and UDOT URLs
     canyon_cameras = []
     for c in camera_data:
         search_blob = f"{c.get('Roadway', '')} {c.get('Name', '')} {c.get('Location', '')}"
@@ -58,15 +58,24 @@ def process_canyons():
             
         if route:
             camera_id = c.get("Id")
-            # Direct S3 JPG link construction
+            
+            # Extract the Location string for labels
+            location_label = c.get("Location", "Unknown Location")
+            
+            # Extract the UDOT page URL from the Views list
+            views = c.get("Views", [])
+            udot_url = views[0].get("Url") if views else f"https://www.udottraffic.utah.gov/map/Cctv/{camera_id}"
+            
+            # Direct S3 JPG link for dashboard display
             image_url = f"https://s3.amazonaws.com/commuterlink-traffic-images/{camera_id}.jpg"
             
             canyon_cameras.append({
                 "id": camera_id,
-                "name": str(c.get("Name", c.get("Location"))).strip(),
+                "name": location_label.strip(),
                 "lat": c.get("Latitude"),
                 "lng": c.get("Longitude"),
-                "url": image_url,
+                "image": image_url,
+                "link": udot_url,
                 "route": route
             })
 
