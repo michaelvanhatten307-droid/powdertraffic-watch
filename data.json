@@ -1,6 +1,6 @@
 {
     "metadata": {
-        "last_updated": "2026-01-14 23:21:43",
+        "last_updated": "2026-01-14 23:30:07",
         "status": "success"
     },
     "canyons": {
@@ -271,6 +271,6 @@
     "plows": [],
     "drive_times": {
         "lcc": "19",
-        "bcc": "28"
+        "bcc": "27"
     }
 }
