@@ -116,16 +116,13 @@
                 const response = await fetch('data.json?t=' + new Date().getTime());
                 const data = await response.json();
 
-                // Update Status & Road Colors
                 updateStatus('lcc-status', data.canyons.lcc.status, lccPoly);
                 updateStatus('bcc-status', data.canyons.bcc.status, bccPoly);
                 
-                // Meta info
                 document.getElementById('last-update').innerText = "LAST_SYNC: " + data.metadata.last_updated;
-                document.getElementById('lcc-time').innerText = "60"; // Placeholder for Hz or updates
+                document.getElementById('lcc-time').innerText = "60"; 
                 document.getElementById('bcc-time').innerText = "60";
 
-                // Update Visual Elements
                 updateCameraSystem(data.cameras);
                 loadSocialFeed(); 
 
@@ -153,27 +150,32 @@
         function updateCameraSystem(cameras) {
             cameraLayer.clearLayers();
             const grid = document.getElementById('cam-grid');
-            grid.innerHTML = ""; // Clear grid to rebuild
+            grid.innerHTML = ""; 
 
-            // Populate Grid (First 4 cameras) and Map (All cameras)
             cameras.forEach((cam, index) => {
-                // Add to Map
+                // Add Marker to Map
                 L.circleMarker([cam.lat, cam.lng], {
                     radius: 4, fillColor: "#00ff41", color: "#000", weight: 1, fillOpacity: 1
-                }).bindPopup(`<div style="color:#00ff41; background:#000; padding:5px;">
-                                <b>${cam.name}</b><br>
-                                <img src="${cam.url}" width="200" style="margin-top:5px; border:1px solid #14532d;">
-                              </div>`).addTo(cameraLayer);
+                }).bindPopup(`
+                    <div style="color:#00ff41; background:#000; padding:5px; font-family:monospace;">
+                        <b style="font-size:10px;">${cam.name}</b><br>
+                        <a href="${cam.link}" target="_blank">
+                            <img src="${cam.image}" width="200" style="margin-top:5px; border:1px solid #14532d;">
+                        </a>
+                        <p style="font-size:8px; margin-top:4px; color:#666;">CLICK TO VIEW ON UDOT</p>
+                    </div>`).addTo(cameraLayer);
 
                 // Add to Surveillance Grid (limit to 4)
                 if (index < 4) {
                     grid.innerHTML += `
-                        <div class="camera-feed border border-green-900 bg-gray-900 overflow-hidden flex flex-col group" onclick="window.open('${cam.url}', '_blank')">
-                            <div class="bg-green-900/80 text-black text-[9px] px-2 py-0.5 font-bold flex justify-between">
-                                <span>CAM_${index + 1} // ${cam.route}</span>
-                                <span class="group-hover:text-white">● LIVE</span>
+                        <div class="camera-feed border border-green-900 bg-gray-900 overflow-hidden flex flex-col group shadow-lg">
+                            <div class="bg-green-900/80 text-black text-[9px] px-2 py-1 font-bold flex justify-between uppercase">
+                                <span class="truncate pr-2">${cam.route} // ${cam.name}</span>
+                                <span class="flex-shrink-0 group-hover:text-white">● LIVE</span>
                             </div>
-                            <img src="${cam.url}" class="w-full grayscale hover:grayscale-0 transition-all duration-500 opacity-70 group-hover:opacity-100">
+                            <a href="${cam.link}" target="_blank" class="block bg-black">
+                                <img src="${cam.image}" class="w-full grayscale hover:grayscale-0 transition-all duration-500 opacity-70 group-hover:opacity-100">
+                            </a>
                         </div>`;
                 }
             });
