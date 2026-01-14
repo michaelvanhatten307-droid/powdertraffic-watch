@@ -48,7 +48,6 @@ def process_canyons():
     # 3. Filter Cameras with Direct Image Links
     canyon_cameras = []
     for c in camera_data:
-        # Use fuzzy search across multiple fields
         search_blob = f"{c.get('Roadway', '')} {c.get('Name', '')} {c.get('Location', '')}"
         
         route = None
@@ -59,7 +58,7 @@ def process_canyons():
             
         if route:
             camera_id = c.get("Id")
-            # Construct the direct S3 JPG link for easy dashboard embedding
+            # Direct S3 JPG link construction
             image_url = f"https://s3.amazonaws.com/commuterlink-traffic-images/{camera_id}.jpg"
             
             canyon_cameras.append({
@@ -92,4 +91,33 @@ def process_canyons():
         text = str(a.get("FullText", ""))
         if any(x in text for x in ["SR-190", "SR-210", "Big Cottonwood", "Little Cottonwood"]):
             canyon_alerts.append({
-                "id": a.get
+                "id": a.get("Id"),
+                "text": text,
+                "severity": a.get("Severity"),
+                "start": a.get("StartTime")
+            })
+
+    # Final structure
+    return {
+        "metadata": {
+            "last_updated": datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ"),
+            "status": "success"
+        },
+        "canyons": {
+            "bcc": {"status": bcc_status, "route_id": "SR-190"},
+            "lcc": {"status": lcc_status, "route_id": "SR-210"}
+        },
+        "alerts": canyon_alerts,
+        "cameras": canyon_cameras,
+        "plows": canyon_plows
+    }
+
+if __name__ == "__main__":
+    final_results = process_canyons()
+    
+    with open("data.json", "w") as f:
+        json.dump(final_results, f, indent=2)
+    
+    print(f"✅ Update complete at {final_results['metadata']['last_updated']}")
+    print(f"   - {len(final_results['cameras'])} Cameras mapped.")
+    print(f"   - {len(final_results['plows'])} Plows and {len(final_results['alerts'])} Alerts tracked.")
