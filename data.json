@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-01-14T16:08:36Z",
+    "last_updated": "2026-01-14T16:10:30Z",
     "status": "success"
   },
   "canyons": {
@@ -14,6 +14,231 @@
     }
   },
   "alerts": [],
-  "cameras": [],
+  "cameras": [
+    {
+      "id": 87869,
+      "name": "Little Cottonwood Rd / SR-210 EB @ Alta Bypass / MP 10.95, SL                                       ",
+      "lat": 40.58493,
+      "lng": -111.65407,
+      "url": null,
+      "route": "LCC"
+    },
+    {
+      "id": 87888,
+      "name": "Little Cottonwood Rd / SR-210 WB @ Upper White Pine / MP 9.7, SL                                    ",
+      "lat": 40.57911,
+      "lng": -111.67448,
+      "url": null,
+      "route": "LCC"
+    },
+    {
+      "id": 88203,
+      "name": "Wasatch Blvd / 3650 E / SR-210 @ 7800 S / Bengal Blvd / Honeywood Cove Dr, CWH",
+      "lat": 40.60957,
+      "lng": -111.79214,
+      "url": null,
+      "route": "LCC"
+    },
+    {
+      "id": 88474,
+      "name": "Wasatch Blvd / 3650 E / SR-210 @ 7700 S, CWH",
+      "lat": 40.61228,
+      "lng": -111.79024,
+      "url": null,
+      "route": "LCC"
+    },
+    {
+      "id": 90131,
+      "name": "Little Cottonwood Rd / SR-210 WB @ Alta / MP 12.16, ALT                                             ",
+      "lat": 40.59104,
+      "lng": -111.63377,
+      "url": null,
+      "route": "LCC"
+    },
+    {
+      "id": 90225,
+      "name": "Big Cottonwood Canyon Rd / SR-190 @ Solitude / MP 14.53, SL                                         ",
+      "lat": 40.62125,
+      "lng": -111.5917,
+      "url": null,
+      "route": "BCC"
+    },
+    {
+      "id": 90263,
+      "name": "Little Cottonwood Rd / SR-210 RWIS EB @ Powerhouse / MP 5.67, SL                                    ",
+      "lat": 40.57096,
+      "lng": -111.74374,
+      "url": null,
+      "route": "LCC"
+    },
+    {
+      "id": 90280,
+      "name": "North Little Cottonwood Rd / Wasatch Blvd / 3600 E / SR-210 @ Wasatch Blvd / 8900 S, CWH",
+      "lat": 40.58925,
+      "lng": -111.79356,
+      "url": null,
+      "route": "LCC"
+    },
+    {
+      "id": 90421,
+      "name": "Big Cottonwood Canyon Rd / SR-190 @ Cardiff Fork / MP 10.74, SL",
+      "lat": 40.65035,
+      "lng": -111.65022,
+      "url": null,
+      "route": "BCC"
+    },
+    {
+      "id": 90422,
+      "name": "Little Cottonwood Rd / SR-210 EB @ White Pine Parking / MP 9.2, SL",
+      "lat": 40.57609,
+      "lng": -111.68218,
+      "url": null,
+      "route": "LCC"
+    },
+    {
+      "id": 90425,
+      "name": "Little Cottonwood Rd / SR-210 @ Tanners Flat / MP 7.94, SL",
+      "lat": 40.5707,
+      "lng": -111.7028,
+      "url": null,
+      "route": "LCC"
+    },
+    {
+      "id": 90453,
+      "name": "Big Cottonwood Canyon Rd / SR-190 @ Butler / MP 10, SL",
+      "lat": 40.64824,
+      "lng": -111.66244,
+      "url": null,
+      "route": "BCC"
+    },
+    {
+      "id": 90455,
+      "name": "Big Cottonwood Canyon Rd / SR-190 @ Dogwood / MP 4.1, SL",
+      "lat": 40.62417,
+      "lng": -111.75059,
+      "url": null,
+      "route": "BCC"
+    },
+    {
+      "id": 90474,
+      "name": "Little Cottonwood Rd / SR-210 @ Lisa Falls / MP 6.5, SL",
+      "lat": 40.57169,
+      "lng": -111.72864,
+      "url": null,
+      "route": "LCC"
+    },
+    {
+      "id": 90488,
+      "name": "Little Cottonwood Rd / SR-210 @ White Pine / MP 8.7, SL",
+      "lat": 40.5745,
+      "lng": -111.69099,
+      "url": null,
+      "route": "LCC"
+    },
+    {
+      "id": 90511,
+      "name": "Big Cottonwood Canyon Rd / SR-190 @ Silver Fork / MP 12.54, SL",
+      "lat": 40.63774,
+      "lng": -111.62091,
+      "url": null,
+      "route": "BCC"
+    },
+    {
+      "id": 90531,
+      "name": "Little Cottonwood Rd / 9800 S / SR-209 @ Wasatch Blvd / 3400 E, SL",
+      "lat": 40.57312,
+      "lng": -111.79848,
+      "url": null,
+      "route": "LCC"
+    },
+    {
+      "id": 90577,
+      "name": "Little Cottonwood Rd / SR-210 @ Upper Vault / MP 5.96, SL",
+      "lat": 40.57141,
+      "lng": -111.73847,
+      "url": null,
+      "route": "LCC"
+    },
+    {
+      "id": 90578,
+      "name": "9400 S / Little Cottonwood Rd / SR-209 @ 2300 E / Quail Hollow Dr, SND",
+      "lat": 40.57908,
+      "lng": -111.82393,
+      "url": null,
+      "route": "LCC"
+    },
+    {
+      "id": 90609,
+      "name": "Big Cottonwood Canyon Rd / SR-190 @ S-Curves / MP 6.38, SL",
+      "lat": 40.63338,
+      "lng": -111.72272,
+      "url": null,
+      "route": "BCC"
+    },
+    {
+      "id": 90702,
+      "name": "Little Cottonwood Rd / 3335 E / SR-209 @ Old Wasatch Blvd / 9710 S, GNT",
+      "lat": 40.57796,
+      "lng": -111.803,
+      "url": null,
+      "route": "LCC"
+    },
+    {
+      "id": 91155,
+      "name": "Big Cottonwood Canyon Rd / SR-190 @ Brighton / MP 16.07, BTN                                        ",
+      "lat": 40.60396,
+      "lng": -111.58256,
+      "url": null,
+      "route": "BCC"
+    },
+    {
+      "id": 91235,
+      "name": "6200 S / SR-190 @ 3000 E, HDY                                                                       ",
+      "lat": 40.63613,
+      "lng": -111.80567,
+      "url": null,
+      "route": "BCC"
+    },
+    {
+      "id": 91286,
+      "name": "Little Cottonwood Rd / SR-210 EB @ Seven Turns / MP 7.4, SL",
+      "lat": 40.57123,
+      "lng": -111.71266,
+      "url": null,
+      "route": "LCC"
+    },
+    {
+      "id": 91469,
+      "name": "North Little Cottonwood Rd / Little Cottonwood Canyon Rd / SR-210 @ Little Cottonwood Rd / SR-209, SL",
+      "lat": 40.57186,
+      "lng": -111.77614,
+      "url": null,
+      "route": "LCC"
+    },
+    {
+      "id": 91481,
+      "name": "Wasatch Blvd / SR-190/SR-210 @ Big Cottonwood Canyon Rd / Fort Union Blvd / SR-190, CWH",
+      "lat": 40.61965,
+      "lng": -111.78925,
+      "url": null,
+      "route": "BCC"
+    },
+    {
+      "id": 91656,
+      "name": "6200 S / Wasatch Blvd / SR-190 @ Wasatch Blvd / Millrock Dr, CWH",
+      "lat": 40.631086,
+      "lng": -111.799814,
+      "url": null,
+      "route": "BCC"
+    },
+    {
+      "id": 91699,
+      "name": "I-215 E NB @ 6200 S / SR-190 / MP 6.34, HDY",
+      "lat": 40.63746,
+      "lng": -111.80779,
+      "url": null,
+      "route": "BCC"
+    }
+  ],
   "plows": []
 }
