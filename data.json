@@ -1,7 +1,18 @@
 {
-  "last_updated": "2026-01-14T16:03:47Z",
-  "bcc_status": "Dry",
-  "lcc_status": "wet",
+  "metadata": {
+    "last_updated": "2026-01-14T16:08:36Z",
+    "status": "success"
+  },
+  "canyons": {
+    "bcc": {
+      "status": "Dry",
+      "route_id": "SR-190"
+    },
+    "lcc": {
+      "status": "wet",
+      "route_id": "SR-210"
+    }
+  },
   "alerts": [],
   "cameras": [],
   "plows": []
