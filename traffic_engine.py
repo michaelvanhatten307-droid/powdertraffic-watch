@@ -57,37 +57,28 @@ async def get_google_time(browser, url):
 
 async def main():
     async with async_playwright() as p:
-        # Launch browser with arguments for cloud stability
-        browser = await p.chromium.launch(headless=True, args=['--no-sandbox', '--disable-setuid-sandbox'])
-        
-        print("LOG: STARTING_DRIVE_TIME_SYNC...")
+        browser = await p.chromium.launch(headless=True)
         lcc_val = await get_google_time(browser, ROUTES["lcc"])
         bcc_val = await get_google_time(browser, ROUTES["bcc"])
         
         try:
-            # 1. READ the existing file (don't lose your camera data!)
             with open('data.json', 'r') as f:
                 data = json.load(f)
             
-            # 2. UPDATE only the drive_times key
-            # If the key doesn't exist yet, this creates it
-            data['drive_times'] = {
-                "lcc": lcc_val,
-                "bcc": bcc_val
-            }
-            
-            # 3. UPDATE metadata timestamp
+            # This ensures the key exists before we try to write to it
+            if 'drive_times' not in data:
+                data['drive_times'] = {}
+                
+            data['drive_times']['lcc'] = lcc_val
+            data['drive_times']['bcc'] = bcc_val
             data['metadata']['last_updated'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-            # 4. SAVE everything back to the file
             with open('data.json', 'w') as f:
                 json.dump(data, f, indent=4)
             
-            print(f"SUCCESS: LCC({lcc_val}) BCC({bcc_val}) recorded.")
-            
+            print(f"MERGE_SUCCESS: LCC:{lcc_val} BCC:{bcc_val}")
         except Exception as e:
-            print(f"FILE_PROCESS_ERROR: {e}")
-            
+            print(f"MERGE_FAILED: {e}")
         await browser.close()
 
 if __name__ == "__main__":
