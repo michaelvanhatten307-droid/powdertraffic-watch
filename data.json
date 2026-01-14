@@ -1,21 +1,8 @@
 {
-  "bcc_status": "OPEN",
-  "lcc_status": "DELAY",
-  "bcc_travel_time": "35",
-  "lcc_travel_time": "55",
-  "last_updated": "SIMULATION_MODE",
-  "plows": [
-    {
-      "VehicleID": "PLOW_TEST_01",
-      "Latitude": 40.573,
-      "Longitude": -111.795,
-      "Status": "PLOWING"
-    },
-    {
-      "VehicleID": "PLOW_TEST_02",
-      "Latitude": 40.638,
-      "Longitude": -111.724,
-      "Status": "HEAVY_DUTY"
-    }
-  ]
+  "bcc_status": "UNKNOWN",
+  "lcc_status": "UNKNOWN",
+  "bcc_travel_time": "N/A",
+  "lcc_travel_time": "N/A",
+  "last_updated": "2026-01-14T15:39:14Z",
+  "plows": []
 }
