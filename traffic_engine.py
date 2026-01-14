@@ -17,7 +17,7 @@ async def get_google_time(browser, url):
     
     try:
         # Navigate and wait for network to settle
-        await page.goto(url, wait_until="networkidle", timeout=60000)
+        await page.goto(url, wait_until="domcontentloaded", timeout=30000)
         
         # Handle the common Google 'Consent' or 'Accept all' pop-up
         try:
