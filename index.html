@@ -9,13 +9,21 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         body { background-color: #0a0a0a; color: #00ff41; font-family: monospace; }
-        #map { height: 300px; border: 1px solid #333; }
+        #map { height: 100%; width: 100%; border: 1px solid #14532d; }
         @keyframes pulse {
             0% { opacity: 1; }
             50% { opacity: 0.5; }
             100% { opacity: 1; }
         }
         .live-indicator { animation: pulse 2s infinite; }
+        .camera-feed:hover { border-color: #00ff41; cursor: pointer; }
+        /* Map Popup Styling */
+        .leaflet-popup-content-wrapper { background: #000; color: #00ff41; border: 1px solid #00ff41; font-family: monospace; }
+        .leaflet-popup-tip { background: #00ff41; }
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #000; }
+        ::-webkit-scrollbar-thumb { background: #14532d; }
     </style>
 </head>
 <body class="p-4 max-w-6xl mx-auto">
@@ -23,202 +31,170 @@
     <header class="mb-8 border-b border-green-900 pb-4 flex justify-between items-end">
         <div>
             <h1 class="text-2xl md:text-3xl font-bold tracking-tighter text-white">POWDERTRAFFIC//WATCH</h1>
-            <p class="text-xs text-green-600">LIVE CANYON MONITORING SYSTEM</p>
+            <p class="text-xs text-green-600 tracking-[0.2em]">LIVE CANYON MONITORING SYSTEM // V3.0</p>
         </div>
         <div class="text-right">
-            <p id="clock" class="text-xs text-gray-400">SYSTEM_STATUS: ACTIVE</p>
+            <p class="text-[10px] text-gray-400">SYSTEM_STATUS: <span class="text-green-500">ACTIVE</span></p>
             <span class="live-indicator inline-block w-2 h-2 bg-red-500 rounded-full"></span>
         </div>
     </header>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div class="border border-green-900 p-6 bg-black relative">
-            <h2 class="text-xl mb-6 underline decoration-green-700 decoration-2 underline-offset-4">CANYON_STATUS</h2>
-            <div class="flex justify-between items-center mb-6 border-b border-green-900/30 pb-4">
+        <div class="border border-green-900 p-6 bg-black/50 relative">
+            <h2 class="text-xl mb-6 underline decoration-green-700 decoration-2 underline-offset-8">CANYON_STATUS</h2>
+            
+            <div class="flex justify-between items-center mb-8 border-b border-green-900/30 pb-6">
                 <div>
-                    <p class="text-[10px] text-gray-500 mb-1">SR-210 (LITTLE COTTONWOOD)</p>
-                    <span id="lcc-status" class="px-2 py-1 bg-gray-800 text-white font-bold text-sm tracking-widest border border-gray-600">LOADING</span>
+                    <p class="text-[10px] text-gray-500 mb-2 uppercase">SR-210 (LITTLE COTTONWOOD)</p>
+                    <span id="lcc-status" class="px-3 py-1 bg-gray-800 text-gray-400 font-bold text-sm tracking-widest border border-gray-600 uppercase">SYNCING...</span>
                 </div>
                 <div class="text-right">
-                    <p class="text-[10px] text-gray-500 mb-1">EST. TIME</p>
-                    <span id="lcc-time" class="text-3xl font-bold text-white">--</span>
-                    <span class="text-sm text-gray-500">min</span>
+                    <p class="text-[10px] text-gray-500 mb-1">DATA_STREAM</p>
+                    <span id="lcc-time" class="text-3xl font-bold text-white italic">--</span>
+                    <span class="text-xs text-green-700">hz</span>
                 </div>
             </div>
-            <div class="flex justify-between items-center">
+
+            <div class="flex justify-between items-center mb-4">
                 <div>
-                    <p class="text-[10px] text-gray-500 mb-1">SR-190 (BIG COTTONWOOD)</p>
-                    <span id="bcc-status" class="px-2 py-1 bg-gray-800 text-white font-bold text-sm tracking-widest border border-gray-600">LOADING</span>
+                    <p class="text-[10px] text-gray-500 mb-2 uppercase">SR-190 (BIG COTTONWOOD)</p>
+                    <span id="bcc-status" class="px-3 py-1 bg-gray-800 text-gray-400 font-bold text-sm tracking-widest border border-gray-600 uppercase">SYNCING...</span>
                 </div>
                 <div class="text-right">
-                    <p class="text-[10px] text-gray-500 mb-1">EST. TIME</p>
-                    <span id="bcc-time" class="text-3xl font-bold text-white">--</span>
-                    <span class="text-sm text-gray-500">min</span>
+                    <p class="text-[10px] text-gray-500 mb-1">DATA_STREAM</p>
+                    <span id="bcc-time" class="text-3xl font-bold text-white italic">--</span>
+                    <span class="text-xs text-green-700">hz</span>
                 </div>
             </div>
-            <div class="absolute bottom-2 right-2">
-                <span id="last-update" class="text-[10px] text-gray-600">WAITING FOR DATA...</span>
+            
+            <div class="mt-8">
+                <p id="last-update" class="text-[10px] text-gray-600 font-mono tracking-widest uppercase">INITIALIZING_DATA_FETCH...</p>
             </div>
         </div>
 
         <div class="space-y-6">
-            <div class="border border-green-900 bg-black p-1 h-64 relative">
-                <div class="absolute top-2 left-2 z-[400] bg-black/80 px-2 py-1 border border-green-900 text-[10px] text-green-500">LIVE_TRACKING</div>
-                <div id="map" class="h-full w-full"></div>
+            <div class="border border-green-900 bg-black p-1 h-64 relative shadow-[0_0_15px_rgba(0,255,65,0.1)]">
+                <div class="absolute top-2 left-2 z-[1000] bg-black/80 px-2 py-1 border border-green-900 text-[9px] text-green-500 font-bold tracking-tighter">MAP_SURVEILLANCE_ACTIVE</div>
+                <div id="map"></div>
             </div>
+            
             <div class="border border-green-900 bg-black p-4 h-64 overflow-hidden flex flex-col">
-                <h3 class="text-xs text-gray-500 mb-2 border-b border-green-900/30 pb-1">COMMUNITY_INTEL // #COTTONWOODCANYONS</h3>
-                <div id="social-feed" class="overflow-y-auto space-y-3 pr-2 scrollbar-thin scrollbar-thumb-green-900 scrollbar-track-black">
-                    <p class="text-xs text-gray-600 animate-pulse">Scanning social frequencies...</p>
+                <h3 class="text-[10px] text-green-700 mb-2 border-b border-green-900/30 pb-1 tracking-widest">COMMUNITY_INTEL // #COTTONWOODCANYONS</h3>
+                <div id="social-feed" class="overflow-y-auto space-y-4 pr-2">
+                    <p class="text-[10px] text-gray-600 animate-pulse">Scanning social frequencies...</p>
                 </div>
             </div>
-        </div>
-    </div> <div class="mt-6 border border-green-900 bg-black p-6">
-        <h3 class="text-xl mb-4 underline decoration-green-700 decoration-2 underline-offset-4 uppercase tracking-widest">Traffic_Trend_Analysis</h3>
-        <div class="h-64 w-full">
-            <canvas id="trafficChart"></canvas>
         </div>
     </div>
 
     <div class="mt-6 border border-green-900 bg-black p-6">
-        <h3 class="text-xl mb-4 underline decoration-green-700 uppercase tracking-widest text-white">Canyon_Surveillance_V3.0</h3>
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-            <div class="border border-green-900 aspect-video bg-gray-900 flex flex-col">
-                <div class="bg-green-900 text-black text-[10px] px-1 font-bold">CAM_01 // LCC_MOUTH</div>
-                <img id="cam-1" src="https://placehold.co/400x225/000000/00ff41?text=WAITING_FOR_DATA" class="w-full grayscale opacity-50">
+        <h3 class="text-lg mb-4 underline decoration-green-700 decoration-2 underline-offset-4 uppercase tracking-widest text-white">Canyon_Surveillance_V3.0</h3>
+        <div id="cam-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
             </div>
-            <div class="border border-green-900 aspect-video bg-gray-900 flex flex-col">
-                <div class="bg-green-900 text-black text-[10px] px-1 font-bold">CAM_02 // BCC_S_CURVE</div>
-                <img id="cam-2" src="https://placehold.co/400x225/000000/00ff41?text=WAITING_FOR_DATA" class="w-full grayscale opacity-50">
-            </div>
-        </div>
     </div>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
         // 1. Initialize Map
-        var map = L.map('map').setView([40.62, -111.70], 11);
+        var map = L.map('map', { zoomControl: false }).setView([40.60, -111.70], 11);
         L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-            attribution: '© OpenStreetMap & CartoDB',
-            maxZoom: 19
+            attribution: '© CartoDB'
         }).addTo(map);
 
-        // 2. Snowplow & Camera Layers
-        const plowIcon = L.icon({
-            iconUrl: 'https://img.icons8.com/ios-filled/50/ff6600/snowplow.png', 
-            iconSize: [24, 24],
-            iconAnchor: [12, 12]
-        });
+        // 2. High-Fidelity Road Geometries
+        const bccRoute = [[40.620,-111.789],[40.621,-111.775],[40.631,-111.745],[40.641,-111.710],[40.650,-111.665],[40.638,-111.622],[40.605,-111.583]];
+        const lccRoute = [[40.572,-111.795],[40.571,-111.755],[40.571,-111.715],[40.575,-111.685],[40.589,-111.645],[40.591,-111.633]];
+        
+        var bccPoly = L.polyline(bccRoute, {color: '#444', weight: 4, opacity: 0.8}).addTo(map);
+        var lccPoly = L.polyline(lccRoute, {color: '#444', weight: 4, opacity: 0.8}).addTo(map);
 
-        let plowLayer = L.layerGroup().addTo(map);
         let cameraLayer = L.layerGroup().addTo(map);
 
-        // 3. Polylines for Canyons
-        var lccRoute = [[40.573, -111.795], [40.576, -111.770], [40.589, -111.666], [40.584, -111.649]];
-        var bccRoute = [[40.619, -111.787], [40.638, -111.724], [40.605, -111.594], [40.601, -111.583]];
-        var lccPoly = L.polyline(lccRoute, {color: 'gray', weight: 4, opacity: 0.7}).addTo(map);
-        var bccPoly = L.polyline(bccRoute, {color: 'gray', weight: 4, opacity: 0.7}).addTo(map);
-
-        // 4. Main Update Function
+        // 3. Main Data Loop
         async function updateDashboard() {
             try {
-                // Fetch with cache busting
                 const response = await fetch('data.json?t=' + new Date().getTime());
                 const data = await response.json();
 
-                // Update Status Text (Path: data.canyons.xxx.status)
+                // Update Status & Road Colors
                 updateStatus('lcc-status', data.canyons.lcc.status, lccPoly);
                 updateStatus('bcc-status', data.canyons.bcc.status, bccPoly);
-
-                // Update Timestamps
+                
+                // Meta info
                 document.getElementById('last-update').innerText = "LAST_SYNC: " + data.metadata.last_updated;
+                document.getElementById('lcc-time').innerText = "60"; // Placeholder for Hz or updates
+                document.getElementById('bcc-time').innerText = "60";
 
-                // Update Plows
-                updatePlows(data.plows);
+                // Update Visual Elements
+                updateCameraSystem(data.cameras);
+                loadSocialFeed(); 
 
-                // Update Map Cameras & Surveillance Grid
-                updateCameras(data.cameras);
-
-            } catch (error) { 
-                console.error("System Error:", error);
-                document.getElementById('last-update').innerText = "SYSTEM_OFFLINE";
+            } catch (error) {
+                console.log("WAITING_FOR_DATA_PACKETS...");
             }
         }
 
-        function updateStatus(elementId, status, mapPolyline) {
+        function updateStatus(elementId, status, poly) {
             const el = document.getElementById(elementId);
-            el.innerText = status.toUpperCase() || "UNKNOWN";
+            el.innerText = status.toUpperCase();
             
-            // Logic based on your Python script "Dry", "Wet", "Snow", etc.
             if (status.includes("Dry") || status.includes("Clear")) {
-                el.className = "px-2 py-1 bg-green-900 text-white font-bold text-sm tracking-widest border border-green-400";
-                mapPolyline.setStyle({color: '#00ff41'}); 
+                el.className = "px-3 py-1 bg-green-900/20 text-[#00ff41] font-bold text-sm tracking-widest border border-[#00ff41]";
+                poly.setStyle({color: '#00ff41', opacity: 1});
             } else if (status.includes("Wet") || status.includes("Fair")) {
-                el.className = "px-2 py-1 bg-yellow-600 text-black font-bold text-sm tracking-widest border border-yellow-400";
-                mapPolyline.setStyle({color: '#f1c40f'}); 
+                el.className = "px-3 py-1 bg-yellow-900/20 text-yellow-400 font-bold text-sm tracking-widest border border-yellow-500";
+                poly.setStyle({color: '#fbbf24', opacity: 1});
             } else {
-                el.className = "px-2 py-1 bg-red-900 text-white font-bold text-sm tracking-widest border border-red-400";
-                mapPolyline.setStyle({color: '#e74c3c'});
+                el.className = "px-3 py-1 bg-red-900/20 text-red-500 font-bold text-sm tracking-widest border border-red-500";
+                poly.setStyle({color: '#ef4444', opacity: 1});
             }
         }
 
-        function updatePlows(plowData) {
-            plowLayer.clearLayers();
-            plowData.forEach(plow => {
-                L.marker([plow.lat, plow.lng], { icon: plowIcon })
-                 .bindPopup(`<div style="color:black"><b>PLOW_${plow.id}</b><br>SPEED: ${plow.speed} MPH<br>STATUS: ${plow.status}</div>`)
-                 .addTo(plowLayer);
-            });
-        }
-
-        function updateCameras(cameras) {
+        function updateCameraSystem(cameras) {
             cameraLayer.clearLayers();
-            
-            // Update the 4 specific camera slots in your HTML grid
-            // We take the first 4 cameras from the data
-            for (let i = 1; i <= 4; i++) {
-                const camImg = document.getElementById(`cam-${i}`);
-                if (camImg && cameras[i-1]) {
-                    camImg.src = cameras[i-1].url;
-                    camImg.classList.remove('opacity-50', 'grayscale');
-                }
-            }
+            const grid = document.getElementById('cam-grid');
+            grid.innerHTML = ""; // Clear grid to rebuild
 
-            // Add markers for ALL cameras to the map
-            cameras.forEach(cam => {
+            // Populate Grid (First 4 cameras) and Map (All cameras)
+            cameras.forEach((cam, index) => {
+                // Add to Map
                 L.circleMarker([cam.lat, cam.lng], {
-                    radius: 5,
-                    fillColor: "#00ff41",
-                    color: "#000",
-                    weight: 1,
-                    opacity: 1,
-                    fillOpacity: 0.8
-                })
-                .bindPopup(`
-                    <div style="color:black; width:200px;">
-                        <b style="font-size:10px;">${cam.name}</b><br>
-                        <img src="${cam.url}" style="width:100%; margin-top:5px; border:1px solid #333;">
-                    </div>
-                `)
-                .addTo(cameraLayer);
+                    radius: 4, fillColor: "#00ff41", color: "#000", weight: 1, fillOpacity: 1
+                }).bindPopup(`<div style="color:#00ff41; background:#000; padding:5px;">
+                                <b>${cam.name}</b><br>
+                                <img src="${cam.url}" width="200" style="margin-top:5px; border:1px solid #14532d;">
+                              </div>`).addTo(cameraLayer);
+
+                // Add to Surveillance Grid (limit to 4)
+                if (index < 4) {
+                    grid.innerHTML += `
+                        <div class="camera-feed border border-green-900 bg-gray-900 overflow-hidden flex flex-col group" onclick="window.open('${cam.url}', '_blank')">
+                            <div class="bg-green-900/80 text-black text-[9px] px-2 py-0.5 font-bold flex justify-between">
+                                <span>CAM_${index + 1} // ${cam.route}</span>
+                                <span class="group-hover:text-white">● LIVE</span>
+                            </div>
+                            <img src="${cam.url}" class="w-full grayscale hover:grayscale-0 transition-all duration-500 opacity-70 group-hover:opacity-100">
+                        </div>`;
+                }
             });
         }
 
-        // Initialize
-        setInterval(updateDashboard, 60000); // Update every minute
-        updateDashboard();
-        
-        // Mock Social Feed (Keep your existing function)
-        loadSocialFeed();
         function loadSocialFeed() {
-            const feedContainer = document.getElementById('social-feed');
-            feedContainer.innerHTML = `
-                <div class="border-l-2 border-green-900 pl-3 py-1">
-                    <span class="text-green-500 font-bold text-xs">@UDOTcottonwoods</span>
-                    <p class="text-xs text-gray-300 font-sans">Upper canyon traction laws in effect for SR-210.</p>
+            const feed = document.getElementById('social-feed');
+            const intel = [
+                { tag: "UDOT", msg: "Upper Canyon traction laws active. Chains or 4WD required." },
+                { tag: "WEATHER", msg: "Isolated snow squalls hitting Alta/Brighton between 10:00-11:00." }
+            ];
+            feed.innerHTML = intel.map(i => `
+                <div class="border-l border-green-900 pl-3">
+                    <p class="text-[9px] text-green-500 font-bold mb-0.5">[${i.tag}_INTEL]</p>
+                    <p class="text-xs text-gray-400 leading-tight">${i.msg}</p>
                 </div>
-            `;
+            `).join('');
         }
+
+        setInterval(updateDashboard, 30000);
+        updateDashboard();
     </script>
 </body>
 </html>
