@@ -1,4 +1,3 @@
-
 import requests
 import os
 import json
@@ -12,27 +11,44 @@ def get_udot_data(endpoint):
     try:
         response = requests.get(url)
         response.raise_for_status()
-        return response.json()
+        data = response.json()
+        
+        # DEBUG: Print the first item to see what the keys/values look like
+        if data and len(data) > 0:
+            print(f"--- DEBUG: First item from {endpoint} ---")
+            print(json.dumps(data[0], indent=2))
+        else:
+            print(f"--- DEBUG: {endpoint} returned no data ---")
+            
+        return data
     except Exception as e:
         print(f"Error fetching {endpoint}: {e}")
         return []
 
 def filter_by_route(data, routes=["SR-210", "SR-190"], key="Route"):
-    return [item for item in data if any(r in str(item.get(key, "")) for r in routes)]
+    filtered = [item for item in data if any(r in str(item.get(key, "")) for r in routes)]
+    print(f"DEBUG: Found {len(filtered)} matches for {routes} in {key}")
+    return filtered
 
 def process_canyons():
     # Road Conditions
-    conditions = filter_by_route(get_udot_data("get/roadconditions"))
-    bcc_status = next((c.get("Status") for c in conditions if "SR-190" in c.get("Route", "")), "UNKNOWN")
-    lcc_status = next((c.get("Status") for c in conditions if "SR-210" in c.get("Route", "")), "UNKNOWN")
+    conditions_data = get_udot_data("get/roadconditions")
+    conditions = filter_by_route(conditions_data)
+    
+    bcc_status = next((c.get("Status") for c in conditions if "SR-190" in str(c.get("Route", ""))), "UNKNOWN")
+    lcc_status = next((c.get("Status") for c in conditions if "SR-210" in str(c.get("Route", ""))), "UNKNOWN")
 
     # Drive Times
-    drive_times = filter_by_route(get_udot_data("get/drivetimes"))
-    bcc_time = next((str(c.get("CurrentTravelTime")) for c in drive_times if "SR-190" in c.get("Route", "")), "N/A")
-    lcc_time = next((str(c.get("CurrentTravelTime")) for c in drive_times if "SR-210" in c.get("Route", "")), "N/A")
+    drive_times_data = get_udot_data("get/drivetimes")
+    drive_times = filter_by_route(drive_times_data)
+    
+    bcc_time = next((str(c.get("CurrentTravelTime")) for c in drive_times if "SR-190" in str(c.get("Route", ""))), "N/A")
+    lcc_time = next((str(c.get("CurrentTravelTime")) for c in drive_times if "SR-210" in str(c.get("Route", ""))), "N/A")
 
     # Snowplows
-    snowplows = filter_by_route(get_udot_data("get/snowplows"), key="RouteName")
+    snowplows_data = get_udot_data("get/snowplows")
+    snowplows = filter_by_route(snowplows_data, key="RouteName")
+    
     plow_list = [
         {
             "VehicleID": p.get("VehicleID"),
