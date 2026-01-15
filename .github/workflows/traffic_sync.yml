@@ -1,28 +1,17 @@
-name: UDOT Drive Time Sync
-
-on:
-  schedule:
-    - cron: '*/10 * * * *'
-  workflow_dispatch:
-
-jobs:
-  sync:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.9'
-      - name: Install Dependencies
-        run: pip install requests
-      - name: Run Scraper
-        run: python traffic_engine.py
-      - name: Commit Changes
+- name: UDOT GIS
         run: |
           git config --global user.name "TrafficBot"
           git config --global user.email "bot@powdertraffic.com"
-          git add data.json
+          
+          # 1. Fetch the latest data from your other script first
+          git fetch origin main
+          
+          # 2. Pull the changes (this keeps cameras/conditions safe)
           git pull --rebase origin main
-          git commit -m "Update Drive Times" || exit 0
+          
+          # 3. NOW add your new drive times from traffic_engine.py
+          git add data.json
+          
+          # 4. Commit and Push
+          git commit -m "Update Drive Times [Skip CI]" || echo "No changes to commit"
           git push origin main
