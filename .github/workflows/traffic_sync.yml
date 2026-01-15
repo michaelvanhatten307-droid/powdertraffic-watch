@@ -2,31 +2,27 @@ name: UDOT Drive Time Sync
 
 on:
   schedule:
-    - cron: '*/10 * * * *'  # Runs every 10 minutes
-  workflow_dispatch:        # Allows you to run it manually
+    - cron: '*/10 * * * *'
+  workflow_dispatch:
 
 jobs:
-  build:
+  sync:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.9'
-
       - name: Install Dependencies
         run: pip install requests
-
-      - name: Run UDOT API Script
+      - name: Run Scraper
         run: python traffic_engine.py
-
-      - name: Save Data
+      - name: Commit Changes
         run: |
           git config --global user.name "TrafficBot"
           git config --global user.email "bot@powdertraffic.com"
           git add data.json
-          git commit -m "UDOT API Update" || exit 0
           git pull --rebase origin main
+          git commit -m "Update Drive Times" || exit 0
           git push origin main
