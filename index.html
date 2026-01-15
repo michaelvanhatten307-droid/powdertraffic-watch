@@ -10,7 +10,6 @@
     <style>
         body { background-color: #0a0a0a; color: #00ff41; font-family: 'Courier New', monospace; }
         #map { height: 100%; width: 100%; border: 1px solid #14532d; background: #000 !important; }
-        /* Glowing Line Effect */
         .leaflet-interactive { filter: drop-shadow(0 0 8px currentColor); transition: stroke 0.5s ease; }
         @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
         .live-indicator { animation: pulse 2s infinite; }
@@ -71,115 +70,89 @@
     </div>
 
     <script>
-        // 1. Map Configuration with Canvas rendering
-        var map = L.map('map', { 
-            zoomControl: false,
-            preferCanvas: true 
-        }).setView([40.61, -111.72], 11);
-
+        // 1. Initialize Map
+        var map = L.map('map', { zoomControl: false, preferCanvas: true }).setView([40.61, -111.72], 11);
         L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png').addTo(map);
-
-        // 2. Tactical Route Geometry
-        const bccCoords = [
-            [40.638, -111.808], [40.628, -111.777], [40.617, -111.748], [40.614, -111.722],
-            [40.627, -111.688], [40.643, -111.666], [40.655, -111.636], [40.641, -111.597],
-            [40.603, -111.583], [40.598, -111.583]
-        ];
-        const lccCoords = [
-            [40.575, -111.805], [40.572, -111.780], [40.568, -111.748], [40.568, -111.713],
-            [40.574, -111.681], [40.583, -111.656], [40.589, -111.638], [40.588, -111.594]
-        ];
-
-        var bccLine = L.polyline(bccCoords, { color: '#14532d', weight: 8, opacity: 0.9, lineJoin: 'round' }).addTo(map);
-        var lccLine = L.polyline(lccCoords, { color: '#14532d', weight: 8, opacity: 0.9, lineJoin: 'round' }).addTo(map);
-
         let cameraLayer = L.layerGroup().addTo(map);
+
+        // 2. Tactical GIS Route Geometry (Real-time Twisty Lines)
+        fetch('https://services1.arcgis.com/8v6is9W66B14oN1D/arcgis/rest/services/Canyon_Travel_Times/FeatureServer/0/query?where=1%3D1&outFields=*&f=geojson')
+            .then(res => res.json())
+            .then(geojsonData => {
+                L.geoJSON(geojsonData, {
+                    style: function(feature) {
+                        return { color: '#00ff41', weight: 4, opacity: 0.6, dashArray: '5, 10' };
+                    }
+                }).addTo(map);
+            });
 
         // 3. Main Update Dashboard Logic
         async function updateDashboard() {
             try {
-                // Fetch data.json with a cache-buster
                 const response = await fetch('data.json?t=' + new Date().getTime());
                 const data = await response.json();
 
-                updateStatus('lcc-status', data.canyons.lcc.status, lccLine);
-                updateStatus('bcc-status', data.canyons.bcc.status, bccLine);
+                // Update Road Status (Dry/Icy)
+                if (data.canyons) {
+                    updateStatusBadge('lcc-status', data.canyons.lcc.status);
+                    updateStatusBadge('bcc-status', data.canyons.bcc.status);
+                }
 
-                // Update Drive Times from Scraper
+                // Update Drive Times
                 if (data.drive_times) {
-                    document.getElementById('lcc-time').innerText = data.drive_times.lcc || "--";
-                    document.getElementById('bcc-time').innerText = data.drive_times.bcc || "--";
+                    document.getElementById('lcc-time').innerText = data.drive_times.lcc;
+                    document.getElementById('bcc-time').innerText = data.drive_times.bcc;
                 }
                 
                 document.getElementById('last-update').innerText = "LAST_CLOUD_SYNC: " + data.metadata.last_updated;
                 document.getElementById('sync-status').innerText = "STABLE";
-                document.getElementById('sync-status').className = "text-green-500";
                 
-                updateCameraSystem(data.cameras);
+                if (data.cameras) updateCameraSystem(data.cameras);
 
             } catch (error) {
-                console.warn("SYNC_ERROR: Waiting for next cloud packet...");
+                console.warn("SYNC_ERROR:", error);
                 document.getElementById('sync-status').innerText = "RECONNECTING";
-                document.getElementById('sync-status').className = "text-yellow-500";
             }
         }
 
-        // 4. Update UI Status and Map Line Colors
-        function updateStatus(id, status, line) {
+        // 4. Helper: Update Status Badge Colors
+        function updateStatusBadge(id, status) {
             const el = document.getElementById(id);
+            if (!el) return;
             el.innerText = status.toUpperCase();
             
-            let color = '#444';
-            if (status.includes("Dry") || status.includes("Clear")) color = '#00ff41'; // Neon Green
-            else if (status.includes("Wet") || status.includes("Fair")) color = '#fbbf24'; // Yellow
-            else color = '#ef4444'; // Red
-
-            // Update status badge styling
-            const colorClasses = {
-                '#00ff41': 'bg-green-900/20 text-[#00ff41] border-[#00ff41]',
-                '#fbbf24': 'bg-yellow-900/20 text-yellow-400 border-yellow-500',
-                '#ef4444': 'bg-red-900/20 text-red-500 border-red-500'
-            };
+            let style = 'bg-gray-800 text-gray-400 border-gray-600';
+            if (status.includes("Dry") || status.includes("Clear")) style = 'bg-green-900/20 text-[#00ff41] border-[#00ff41]';
+            else if (status.includes("Wet") || status.includes("Fair")) style = 'bg-yellow-900/20 text-yellow-400 border-yellow-500';
+            else if (status.includes("Snow") || status.includes("Icy") || status.includes("Closed")) style = 'bg-red-900/20 text-red-500 border-red-500';
             
-            el.className = `px-3 py-1 font-bold text-sm border uppercase ${colorClasses[color] || 'bg-gray-800 text-gray-400 border-gray-600'}`;
-            
-            // Apply neon glow color to the specific road on the map
-            line.setStyle({ color: color });
+            el.className = `px-3 py-1 font-bold text-sm border uppercase ${style}`;
         }
 
-        // 5. Build Surveillance Grid and Map Markers
+        // 5. Helper: Build Surveillance Grid and Map Markers
         function updateCameraSystem(cameras) {
             cameraLayer.clearLayers();
             const grid = document.getElementById('cam-grid');
             grid.innerHTML = ""; 
 
             cameras.forEach((cam, index) => {
-                // Map Marker
                 L.circleMarker([cam.lat, cam.lng], {
                     radius: 5, fillColor: "#00ff41", color: "#000", weight: 2, fillOpacity: 1
-                }).bindPopup(`
-                    <div style="color:#00ff41; background:#000; padding:5px; border:1px solid #00ff41; font-family:monospace;">
-                        <b>${cam.name}</b><br>
-                        <img src="${cam.image}" referrerpolicy="no-referrer" width="200" style="margin-top:5px; border:1px solid #14532d;">
-                    </div>
-                `).addTo(cameraLayer);
+                }).bindPopup(`<div style="color:#00ff41; background:#000; padding:5px; border:1px solid #00ff41;"><b>${cam.name}</b><br><img src="${cam.image}" width="200" style="margin-top:5px;"></div>`).addTo(cameraLayer);
 
-                // Grid Feed (Top 4 cameras)
                 if (index < 4) {
                     grid.innerHTML += `
                         <div class="camera-feed p-1 group">
                             <div class="bg-green-900/80 text-black text-[9px] px-2 py-1 font-bold flex justify-between uppercase">
                                 <span class="truncate pr-2">${cam.name}</span>
-                                <span class="group-hover:text-white">● LIVE</span>
+                                <span>● LIVE</span>
                             </div>
-                            <img src="${cam.image}" referrerpolicy="no-referrer" 
-                                 class="w-full grayscale hover:grayscale-0 transition-all duration-300 opacity-70 group-hover:opacity-100 h-32 object-cover">
+                            <img src="${cam.image}" referrerpolicy="no-referrer" class="w-full grayscale hover:grayscale-0 transition-all opacity-70 group-hover:opacity-100 h-32 object-cover">
                         </div>`;
                 }
             });
         }
 
-        // Start Sync Loop (Every 30 seconds)
         setInterval(updateDashboard, 30000);
         updateDashboard();
     </script>
