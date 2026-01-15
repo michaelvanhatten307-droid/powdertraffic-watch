@@ -1,29 +1,25 @@
-name: Google Maps Sync
+name: UDOT Drive Time Sync
+
 on:
   schedule:
-    - cron: '*/10 * * * *' # Every 10 minutes
-  workflow_dispatch:      # This creates the "Run" button
+    - cron: '*/10 * * * *'  # Runs every 10 minutes
+  workflow_dispatch:        # Allows you to run it manually
 
 jobs:
-  scrape-and-update:
+  build:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v3
 
-      - name: Setup Python
+      - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.9'
 
-      - name: Install Tools
-        run: |
-          pip install playwright
-          playwright install chromium
+      - name: Install Dependencies
+        run: pip install requests
 
-      - name: Execute Scraper
+      - name: Run UDOT API Script
         run: python traffic_engine.py
 
       - name: Save Data
@@ -31,7 +27,6 @@ jobs:
           git config --global user.name "TrafficBot"
           git config --global user.email "bot@powdertraffic.com"
           git add data.json
-          git commit -m "Update Traffic Times" || exit 0
-          # This line pulls the latest changes (like UDOT updates) and puts your changes on top
+          git commit -m "UDOT API Update" || exit 0
           git pull --rebase origin main
           git push origin main
