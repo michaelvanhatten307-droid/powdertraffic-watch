@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-03-02T20:43:08Z",
+    "last_updated": "2026-03-02T21:19:02Z",
     "status": "success"
   },
   "canyons": {
@@ -16,30 +16,12 @@
   "alerts": [],
   "cameras": [
     {
-      "id": 93100,
-      "name": "North Little Cottonwood Rd / Wasatch Blvd / 3600 E / SR-210 @ Wasatch Blvd / 8900 S, CWH",
-      "lat": 40.58925,
-      "lng": -111.79356,
-      "image": "https://www.udottraffic.utah.gov/map/Cctv/93100?isSnapshot=true",
-      "link": "https://www.udottraffic.utah.gov/map/Cctv/93100",
-      "route": "LCC"
-    },
-    {
       "id": 93741,
       "name": "Little Cottonwood Rd / 9800 S / SR-209 @ Wasatch Blvd / 3400 E, SL",
       "lat": 40.57312,
       "lng": -111.79848,
       "image": "https://www.udottraffic.utah.gov/map/Cctv/93741?isSnapshot=true",
       "link": "https://www.udottraffic.utah.gov/map/Cctv/93741",
-      "route": "LCC"
-    },
-    {
-      "id": 94440,
-      "name": "Wasatch Blvd / 3650 E / SR-210 @ 7700 S, CWH",
-      "lat": 40.61228,
-      "lng": -111.79024,
-      "image": "https://www.udottraffic.utah.gov/map/Cctv/94440?isSnapshot=true",
-      "link": "https://www.udottraffic.utah.gov/map/Cctv/94440",
       "route": "LCC"
     }
   ],
