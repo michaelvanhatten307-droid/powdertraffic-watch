@@ -1,11 +1,11 @@
 {
   "metadata": {
-    "last_updated": "2026-03-02T15:56:58Z",
+    "last_updated": "2026-03-02T17:00:22Z",
     "status": "success"
   },
   "canyons": {
     "bcc": {
-      "status": "Wet",
+      "status": "Dry",
       "route_id": "SR-190"
     },
     "lcc": {
