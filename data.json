@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-03-06T23:59:17Z",
+    "last_updated": "2026-03-07T02:41:00Z",
     "status": "success"
   },
   "canyons": {
@@ -243,8 +243,8 @@
     {
       "id": 94250,
       "name": "Big Cottonwood Canyon Rd / SR-190 @ Brighton / MP 16.07, BTN",
-      "lat": 40.60396,
-      "lng": -111.58256,
+      "lat": 40.603591,
+      "lng": -111.582534,
       "image": "https://www.udottraffic.utah.gov/map/Cctv/94250?isSnapshot=true",
       "link": "https://www.udottraffic.utah.gov/map/Cctv/94250",
       "route": "BCC"
