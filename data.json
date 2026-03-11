@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-03-11T02:46:05Z",
+    "last_updated": "2026-03-11T04:47:42Z",
     "status": "success"
   },
   "canyons": {
@@ -259,12 +259,12 @@
       "route": "LCC"
     },
     {
-      "id": 95412,
+      "id": 95643,
       "name": "I-215 E NB @ 6200 S / SR-190 / MP 6.34, HDY",
       "lat": 40.63746,
       "lng": -111.80779,
-      "image": "https://www.udottraffic.utah.gov/map/Cctv/95412?isSnapshot=true",
-      "link": "https://www.udottraffic.utah.gov/map/Cctv/95412",
+      "image": "https://www.udottraffic.utah.gov/map/Cctv/95643?isSnapshot=true",
+      "link": "https://www.udottraffic.utah.gov/map/Cctv/95643",
       "route": "BCC"
     }
   ],
