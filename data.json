@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-03-16T19:56:39Z",
+    "last_updated": "2026-03-16T20:50:22Z",
     "status": "success"
   },
   "canyons": {
@@ -15,15 +15,6 @@
   },
   "alerts": [],
   "cameras": [
-    {
-      "id": 103507,
-      "name": "Wasatch Blvd / SR-190/SR-210 @ Big Cottonwood Canyon Rd / Fort Union Blvd / SR-190, CWH",
-      "lat": 40.61965,
-      "lng": -111.78925,
-      "image": "https://www.udottraffic.utah.gov/map/Cctv/103507?isSnapshot=true",
-      "link": "https://www.udottraffic.utah.gov/map/Cctv/103507",
-      "route": "BCC"
-    },
     {
       "id": 103792,
       "name": "Little Cottonwood Rd / SR-210 @ White Pine / MP 8.7, SL",
@@ -88,15 +79,6 @@
       "route": "BCC"
     },
     {
-      "id": 104074,
-      "name": "Little Cottonwood Rd / 9800 S / SR-209 @ Wasatch Blvd / 3400 E, SL",
-      "lat": 40.57312,
-      "lng": -111.79848,
-      "image": "https://www.udottraffic.utah.gov/map/Cctv/104074?isSnapshot=true",
-      "link": "https://www.udottraffic.utah.gov/map/Cctv/104074",
-      "route": "LCC"
-    },
-    {
       "id": 104155,
       "name": "Little Cottonwood Rd / SR-210 @ Tanners Flat / MP 7.94, SL",
       "lat": 40.5707,
@@ -113,15 +95,6 @@
       "image": "https://www.udottraffic.utah.gov/map/Cctv/104157?isSnapshot=true",
       "link": "https://www.udottraffic.utah.gov/map/Cctv/104157",
       "route": "LCC"
-    },
-    {
-      "id": 104159,
-      "name": "6200 S / Wasatch Blvd / SR-190 @ Wasatch Blvd / Millrock Dr, CWH",
-      "lat": 40.631086,
-      "lng": -111.799814,
-      "image": "https://www.udottraffic.utah.gov/map/Cctv/104159?isSnapshot=true",
-      "link": "https://www.udottraffic.utah.gov/map/Cctv/104159",
-      "route": "BCC"
     },
     {
       "id": 104297,
@@ -266,6 +239,33 @@
       "image": "https://www.udottraffic.utah.gov/map/Cctv/105309?isSnapshot=true",
       "link": "https://www.udottraffic.utah.gov/map/Cctv/105309",
       "route": "BCC"
+    },
+    {
+      "id": 105415,
+      "name": "6200 S / Wasatch Blvd / SR-190 @ Wasatch Blvd / Millrock Dr, CWH",
+      "lat": 40.631086,
+      "lng": -111.799814,
+      "image": "https://www.udottraffic.utah.gov/map/Cctv/105415?isSnapshot=true",
+      "link": "https://www.udottraffic.utah.gov/map/Cctv/105415",
+      "route": "BCC"
+    },
+    {
+      "id": 105455,
+      "name": "Wasatch Blvd / SR-190/SR-210 @ Big Cottonwood Canyon Rd / Fort Union Blvd / SR-190, CWH",
+      "lat": 40.61965,
+      "lng": -111.78925,
+      "image": "https://www.udottraffic.utah.gov/map/Cctv/105455?isSnapshot=true",
+      "link": "https://www.udottraffic.utah.gov/map/Cctv/105455",
+      "route": "BCC"
+    },
+    {
+      "id": 105530,
+      "name": "Little Cottonwood Rd / 9800 S / SR-209 @ Wasatch Blvd / 3400 E, SL",
+      "lat": 40.57312,
+      "lng": -111.79848,
+      "image": "https://www.udottraffic.utah.gov/map/Cctv/105530?isSnapshot=true",
+      "link": "https://www.udottraffic.utah.gov/map/Cctv/105530",
+      "route": "LCC"
     }
   ],
   "plows": []
