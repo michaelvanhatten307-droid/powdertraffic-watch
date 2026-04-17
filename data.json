@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-04-17T07:12:18Z",
+    "last_updated": "2026-04-17T08:56:33Z",
     "status": "success"
   },
   "canyons": {
@@ -9,7 +9,7 @@
       "route_id": "SR-190"
     },
     "lcc": {
-      "status": "Wet",
+      "status": "Snow Covered",
       "route_id": "SR-210"
     }
   },
