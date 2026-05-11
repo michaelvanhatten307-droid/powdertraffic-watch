@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-05-11T14:10:01Z",
+    "last_updated": "2026-05-11T16:48:04Z",
     "status": "success"
   },
   "canyons": {
@@ -15,15 +15,6 @@
   },
   "alerts": [],
   "cameras": [
-    {
-      "id": 121724,
-      "name": "I-215 E NB @ 6200 S / SR-190 / MP 6.34, HDY",
-      "lat": 40.63746,
-      "lng": -111.80779,
-      "image": "https://www.udottraffic.utah.gov/map/Cctv/121724?isSnapshot=true",
-      "link": "https://www.udottraffic.utah.gov/map/Cctv/121724",
-      "route": "BCC"
-    },
     {
       "id": 122179,
       "name": "North Little Cottonwood Rd / Wasatch Blvd / 3600 E / SR-210 @ Wasatch Blvd / 8900 S, CWH",
@@ -52,15 +43,6 @@
       "route": "LCC"
     },
     {
-      "id": 122359,
-      "name": "Little Cottonwood Rd / SR-210 @ White Pine / MP 8.7, SL",
-      "lat": 40.5745,
-      "lng": -111.69099,
-      "image": "https://www.udottraffic.utah.gov/map/Cctv/122359?isSnapshot=true",
-      "link": "https://www.udottraffic.utah.gov/map/Cctv/122359",
-      "route": "LCC"
-    },
-    {
       "id": 122423,
       "name": "Little Cottonwood Rd / 9800 S / SR-209 @ Wasatch Blvd / 3400 E, SL",
       "lat": 40.57312,
@@ -77,15 +59,6 @@
       "image": "https://www.udottraffic.utah.gov/map/Cctv/122549?isSnapshot=true",
       "link": "https://www.udottraffic.utah.gov/map/Cctv/122549",
       "route": "LCC"
-    },
-    {
-      "id": 122652,
-      "name": "Big Cottonwood Canyon Rd / SR-190 @ Solitude / MP 14.53, SL",
-      "lat": 40.62125,
-      "lng": -111.5917,
-      "image": "https://www.udottraffic.utah.gov/map/Cctv/122652?isSnapshot=true",
-      "link": "https://www.udottraffic.utah.gov/map/Cctv/122652",
-      "route": "BCC"
     },
     {
       "id": 122674,
@@ -214,15 +187,6 @@
       "route": "BCC"
     },
     {
-      "id": 123145,
-      "name": "Big Cottonwood Canyon Rd / SR-190 @ Brighton / MP 16.07, BTN",
-      "lat": 40.603591,
-      "lng": -111.582534,
-      "image": "https://www.udottraffic.utah.gov/map/Cctv/123145?isSnapshot=true",
-      "link": "https://www.udottraffic.utah.gov/map/Cctv/123145",
-      "route": "BCC"
-    },
-    {
       "id": 123345,
       "name": "6200 S / Wasatch Blvd / SR-190 @ Wasatch Blvd / Millrock Dr, CWH",
       "lat": 40.631086,
@@ -259,12 +223,48 @@
       "route": "LCC"
     },
     {
-      "id": 123675,
+      "id": 124179,
+      "name": "Big Cottonwood Canyon Rd / SR-190 @ Brighton / MP 16.07, BTN",
+      "lat": 40.603591,
+      "lng": -111.582534,
+      "image": "https://www.udottraffic.utah.gov/map/Cctv/124179?isSnapshot=true",
+      "link": "https://www.udottraffic.utah.gov/map/Cctv/124179",
+      "route": "BCC"
+    },
+    {
+      "id": 124190,
       "name": "Big Cottonwood Canyon Rd / SR-190 @ Silver Fork / MP 12.54, SL",
       "lat": 40.63774,
       "lng": -111.62091,
-      "image": "https://www.udottraffic.utah.gov/map/Cctv/123675?isSnapshot=true",
-      "link": "https://www.udottraffic.utah.gov/map/Cctv/123675",
+      "image": "https://www.udottraffic.utah.gov/map/Cctv/124190?isSnapshot=true",
+      "link": "https://www.udottraffic.utah.gov/map/Cctv/124190",
+      "route": "BCC"
+    },
+    {
+      "id": 124275,
+      "name": "Big Cottonwood Canyon Rd / SR-190 @ Solitude / MP 14.53, SL",
+      "lat": 40.62125,
+      "lng": -111.5917,
+      "image": "https://www.udottraffic.utah.gov/map/Cctv/124275?isSnapshot=true",
+      "link": "https://www.udottraffic.utah.gov/map/Cctv/124275",
+      "route": "BCC"
+    },
+    {
+      "id": 124278,
+      "name": "Little Cottonwood Rd / SR-210 @ White Pine / MP 8.7, SL",
+      "lat": 40.5745,
+      "lng": -111.69099,
+      "image": "https://www.udottraffic.utah.gov/map/Cctv/124278?isSnapshot=true",
+      "link": "https://www.udottraffic.utah.gov/map/Cctv/124278",
+      "route": "LCC"
+    },
+    {
+      "id": 124289,
+      "name": "I-215 E NB @ 6200 S / SR-190 / MP 6.34, HDY",
+      "lat": 40.63746,
+      "lng": -111.80779,
+      "image": "https://www.udottraffic.utah.gov/map/Cctv/124289?isSnapshot=true",
+      "link": "https://www.udottraffic.utah.gov/map/Cctv/124289",
       "route": "BCC"
     }
   ],
