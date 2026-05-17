@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-05-17T18:38:02Z",
+    "last_updated": "2026-05-17T19:52:40Z",
     "status": "success"
   },
   "canyons": {
@@ -232,15 +232,6 @@
       "route": "LCC"
     },
     {
-      "id": 126963,
-      "name": "Wasatch Blvd / 3650 E / SR-210 @ 7700 S, CWH",
-      "lat": 40.61228,
-      "lng": -111.79024,
-      "image": "https://www.udottraffic.utah.gov/map/Cctv/126963?isSnapshot=true",
-      "link": "https://www.udottraffic.utah.gov/map/Cctv/126963",
-      "route": "LCC"
-    },
-    {
       "id": 127194,
       "name": "Big Cottonwood Canyon Rd / SR-190 @ Brighton / MP 16.07, BTN",
       "lat": 40.603591,
@@ -265,6 +256,15 @@
       "lng": -111.65407,
       "image": "https://www.udottraffic.utah.gov/map/Cctv/127424?isSnapshot=true",
       "link": "https://www.udottraffic.utah.gov/map/Cctv/127424",
+      "route": "LCC"
+    },
+    {
+      "id": 127758,
+      "name": "Wasatch Blvd / 3650 E / SR-210 @ 7700 S, CWH",
+      "lat": 40.61228,
+      "lng": -111.79024,
+      "image": "https://www.udottraffic.utah.gov/map/Cctv/127758?isSnapshot=true",
+      "link": "https://www.udottraffic.utah.gov/map/Cctv/127758",
       "route": "LCC"
     }
   ],
