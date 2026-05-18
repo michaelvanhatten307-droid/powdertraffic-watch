@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-05-18T04:45:06Z",
+    "last_updated": "2026-05-18T08:37:48Z",
     "status": "success"
   },
   "canyons": {
@@ -58,15 +58,6 @@
       "lng": -111.73847,
       "image": "https://www.udottraffic.utah.gov/map/Cctv/128008?isSnapshot=true",
       "link": "https://www.udottraffic.utah.gov/map/Cctv/128008",
-      "route": "LCC"
-    },
-    {
-      "id": 128049,
-      "name": "Little Cottonwood Rd / SR-210 @ Tanners Flat / MP 7.94, SL",
-      "lat": 40.5707,
-      "lng": -111.7028,
-      "image": "https://www.udottraffic.utah.gov/map/Cctv/128049?isSnapshot=true",
-      "link": "https://www.udottraffic.utah.gov/map/Cctv/128049",
       "route": "LCC"
     },
     {
@@ -151,15 +142,6 @@
       "route": "LCC"
     },
     {
-      "id": 128759,
-      "name": "Little Cottonwood Rd / SR-210 EB @ Seven Turns / MP 7.4, SL",
-      "lat": 40.57123,
-      "lng": -111.71266,
-      "image": "https://www.udottraffic.utah.gov/map/Cctv/128759?isSnapshot=true",
-      "link": "https://www.udottraffic.utah.gov/map/Cctv/128759",
-      "route": "LCC"
-    },
-    {
       "id": 128812,
       "name": "Little Cottonwood Rd / SR-210 RWIS EB @ Powerhouse / MP 5.67, SL",
       "lat": 40.57096,
@@ -196,39 +178,12 @@
       "route": "BCC"
     },
     {
-      "id": 129152,
-      "name": "Wasatch Blvd / 3650 E / SR-210 @ 7800 S / Bengal Blvd / Honeywood Cove Dr, CWH",
-      "lat": 40.60957,
-      "lng": -111.79214,
-      "image": "https://www.udottraffic.utah.gov/map/Cctv/129152?isSnapshot=true",
-      "link": "https://www.udottraffic.utah.gov/map/Cctv/129152",
-      "route": "LCC"
-    },
-    {
-      "id": 129247,
-      "name": "Little Cottonwood Rd / SR-210 @ White Pine / MP 8.7, SL",
-      "lat": 40.5745,
-      "lng": -111.69099,
-      "image": "https://www.udottraffic.utah.gov/map/Cctv/129247?isSnapshot=true",
-      "link": "https://www.udottraffic.utah.gov/map/Cctv/129247",
-      "route": "LCC"
-    },
-    {
       "id": 129302,
       "name": "Big Cottonwood Canyon Rd / SR-190 @ Butler / MP 10, SL",
       "lat": 40.64824,
       "lng": -111.66244,
       "image": "https://www.udottraffic.utah.gov/map/Cctv/129302?isSnapshot=true",
       "link": "https://www.udottraffic.utah.gov/map/Cctv/129302",
-      "route": "BCC"
-    },
-    {
-      "id": 129314,
-      "name": "Big Cottonwood Canyon Rd / SR-190 @ Cardiff Fork / MP 10.74, SL",
-      "lat": 40.65035,
-      "lng": -111.65022,
-      "image": "https://www.udottraffic.utah.gov/map/Cctv/129314?isSnapshot=true",
-      "link": "https://www.udottraffic.utah.gov/map/Cctv/129314",
       "route": "BCC"
     },
     {
@@ -266,6 +221,51 @@
       "image": "https://www.udottraffic.utah.gov/map/Cctv/129721?isSnapshot=true",
       "link": "https://www.udottraffic.utah.gov/map/Cctv/129721",
       "route": "BCC"
+    },
+    {
+      "id": 129898,
+      "name": "Wasatch Blvd / 3650 E / SR-210 @ 7800 S / Bengal Blvd / Honeywood Cove Dr, CWH",
+      "lat": 40.60957,
+      "lng": -111.79214,
+      "image": "https://www.udottraffic.utah.gov/map/Cctv/129898?isSnapshot=true",
+      "link": "https://www.udottraffic.utah.gov/map/Cctv/129898",
+      "route": "LCC"
+    },
+    {
+      "id": 130007,
+      "name": "Little Cottonwood Rd / SR-210 @ Tanners Flat / MP 7.94, SL",
+      "lat": 40.5707,
+      "lng": -111.7028,
+      "image": "https://www.udottraffic.utah.gov/map/Cctv/130007?isSnapshot=true",
+      "link": "https://www.udottraffic.utah.gov/map/Cctv/130007",
+      "route": "LCC"
+    },
+    {
+      "id": 130008,
+      "name": "Big Cottonwood Canyon Rd / SR-190 @ Cardiff Fork / MP 10.74, SL",
+      "lat": 40.65035,
+      "lng": -111.65022,
+      "image": "https://www.udottraffic.utah.gov/map/Cctv/130008?isSnapshot=true",
+      "link": "https://www.udottraffic.utah.gov/map/Cctv/130008",
+      "route": "BCC"
+    },
+    {
+      "id": 130013,
+      "name": "Little Cottonwood Rd / SR-210 @ White Pine / MP 8.7, SL",
+      "lat": 40.5745,
+      "lng": -111.69099,
+      "image": "https://www.udottraffic.utah.gov/map/Cctv/130013?isSnapshot=true",
+      "link": "https://www.udottraffic.utah.gov/map/Cctv/130013",
+      "route": "LCC"
+    },
+    {
+      "id": 130015,
+      "name": "Little Cottonwood Rd / SR-210 EB @ Seven Turns / MP 7.4, SL",
+      "lat": 40.57123,
+      "lng": -111.71266,
+      "image": "https://www.udottraffic.utah.gov/map/Cctv/130015?isSnapshot=true",
+      "link": "https://www.udottraffic.utah.gov/map/Cctv/130015",
+      "route": "LCC"
     }
   ],
   "plows": []
