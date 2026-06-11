@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-06-11T19:13:55Z",
+    "last_updated": "2026-06-11T21:31:42Z",
     "status": "success"
   },
   "canyons": {
@@ -223,24 +223,6 @@
       "route": "LCC"
     },
     {
-      "id": 136756,
-      "name": "Little Cottonwood Rd / SR-210 WB @ Upper White Pine / MP 9.7, SL",
-      "lat": 40.57911,
-      "lng": -111.67448,
-      "image": "https://www.udottraffic.utah.gov/map/Cctv/136756?isSnapshot=true",
-      "link": "https://www.udottraffic.utah.gov/map/Cctv/136756",
-      "route": "LCC"
-    },
-    {
-      "id": 136757,
-      "name": "Little Cottonwood Rd / SR-210 EB @ Alta Bypass / MP 10.95, SL",
-      "lat": 40.58493,
-      "lng": -111.65407,
-      "image": "https://www.udottraffic.utah.gov/map/Cctv/136757?isSnapshot=true",
-      "link": "https://www.udottraffic.utah.gov/map/Cctv/136757",
-      "route": "LCC"
-    },
-    {
       "id": 136795,
       "name": "Big Cottonwood Canyon Rd / SR-190 @ Brighton / MP 16.07, BTN",
       "lat": 40.603591,
@@ -250,15 +232,6 @@
       "route": "BCC"
     },
     {
-      "id": 136840,
-      "name": "Little Cottonwood Rd / SR-210 WB @ Alta / MP 12.16, ALT",
-      "lat": 40.59104,
-      "lng": -111.63377,
-      "image": "https://www.udottraffic.utah.gov/map/Cctv/136840?isSnapshot=true",
-      "link": "https://www.udottraffic.utah.gov/map/Cctv/136840",
-      "route": "LCC"
-    },
-    {
       "id": 136958,
       "name": "Big Cottonwood Canyon Rd / SR-190 @ Solitude / MP 14.53, SL",
       "lat": 40.62125,
@@ -266,6 +239,33 @@
       "image": "https://www.udottraffic.utah.gov/map/Cctv/136958?isSnapshot=true",
       "link": "https://www.udottraffic.utah.gov/map/Cctv/136958",
       "route": "BCC"
+    },
+    {
+      "id": 137940,
+      "name": "Little Cottonwood Rd / SR-210 WB @ Alta / MP 12.16, ALT",
+      "lat": 40.59104,
+      "lng": -111.63377,
+      "image": "https://www.udottraffic.utah.gov/map/Cctv/137940?isSnapshot=true",
+      "link": "https://www.udottraffic.utah.gov/map/Cctv/137940",
+      "route": "LCC"
+    },
+    {
+      "id": 138123,
+      "name": "Little Cottonwood Rd / SR-210 WB @ Upper White Pine / MP 9.7, SL",
+      "lat": 40.57911,
+      "lng": -111.67448,
+      "image": "https://www.udottraffic.utah.gov/map/Cctv/138123?isSnapshot=true",
+      "link": "https://www.udottraffic.utah.gov/map/Cctv/138123",
+      "route": "LCC"
+    },
+    {
+      "id": 138349,
+      "name": "Little Cottonwood Rd / SR-210 EB @ Alta Bypass / MP 10.95, SL",
+      "lat": 40.58493,
+      "lng": -111.65407,
+      "image": "https://www.udottraffic.utah.gov/map/Cctv/138349?isSnapshot=true",
+      "link": "https://www.udottraffic.utah.gov/map/Cctv/138349",
+      "route": "LCC"
     }
   ],
   "plows": []
