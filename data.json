@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-06-21T06:33:00Z",
+    "last_updated": "2026-06-21T10:22:33Z",
     "status": "success"
   },
   "canyons": {
@@ -15,15 +15,6 @@
   },
   "alerts": [],
   "cameras": [
-    {
-      "id": 135539,
-      "name": "I-215 E NB @ 6200 S / SR-190 / MP 6.34, HDY",
-      "lat": 40.63746,
-      "lng": -111.80779,
-      "image": "https://www.udottraffic.utah.gov/map/Cctv/135539?isSnapshot=true",
-      "link": "https://www.udottraffic.utah.gov/map/Cctv/135539",
-      "route": "BCC"
-    },
     {
       "id": 135548,
       "name": "Wasatch Blvd / 3650 E / SR-210 @ 7700 S, CWH",
@@ -223,15 +214,6 @@
       "route": "LCC"
     },
     {
-      "id": 136795,
-      "name": "Big Cottonwood Canyon Rd / SR-190 @ Brighton / MP 16.07, BTN",
-      "lat": 40.603591,
-      "lng": -111.582534,
-      "image": "https://www.udottraffic.utah.gov/map/Cctv/136795?isSnapshot=true",
-      "link": "https://www.udottraffic.utah.gov/map/Cctv/136795",
-      "route": "BCC"
-    },
-    {
       "id": 136958,
       "name": "Big Cottonwood Canyon Rd / SR-190 @ Solitude / MP 14.53, SL",
       "lat": 40.62125,
@@ -266,6 +248,24 @@
       "image": "https://www.udottraffic.utah.gov/map/Cctv/138349?isSnapshot=true",
       "link": "https://www.udottraffic.utah.gov/map/Cctv/138349",
       "route": "LCC"
+    },
+    {
+      "id": 138576,
+      "name": "Big Cottonwood Canyon Rd / SR-190 @ Brighton / MP 16.07, BTN",
+      "lat": 40.603591,
+      "lng": -111.582534,
+      "image": "https://www.udottraffic.utah.gov/map/Cctv/138576?isSnapshot=true",
+      "link": "https://www.udottraffic.utah.gov/map/Cctv/138576",
+      "route": "BCC"
+    },
+    {
+      "id": 138670,
+      "name": "I-215 E NB @ 6200 S / SR-190 / MP 6.34, HDY",
+      "lat": 40.63746,
+      "lng": -111.80779,
+      "image": "https://www.udottraffic.utah.gov/map/Cctv/138670?isSnapshot=true",
+      "link": "https://www.udottraffic.utah.gov/map/Cctv/138670",
+      "route": "BCC"
     }
   ],
   "plows": []
