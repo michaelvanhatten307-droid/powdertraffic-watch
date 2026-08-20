@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-08-20T10:49:53Z",
+    "last_updated": "2026-08-20T11:31:29Z",
     "status": "success"
   },
   "canyons": {
@@ -220,6 +220,51 @@
       "lng": -111.74374,
       "image": "https://www.udottraffic.utah.gov/map/Cctv/155429?isSnapshot=true",
       "link": "https://www.udottraffic.utah.gov/map/Cctv/155429",
+      "route": "LCC"
+    },
+    {
+      "id": 155484,
+      "name": "I-215 E NB @ 6200 S / SR-190 / MP 6.34, HDY",
+      "lat": 40.63746,
+      "lng": -111.80779,
+      "image": "https://www.udottraffic.utah.gov/map/Cctv/155484?isSnapshot=true",
+      "link": "https://www.udottraffic.utah.gov/map/Cctv/155484",
+      "route": "BCC"
+    },
+    {
+      "id": 155529,
+      "name": "6200 S / Wasatch Blvd / SR-190 @ Wasatch Blvd / Millrock Dr, CWH",
+      "lat": 40.631086,
+      "lng": -111.799814,
+      "image": "https://www.udottraffic.utah.gov/map/Cctv/155529?isSnapshot=true",
+      "link": "https://www.udottraffic.utah.gov/map/Cctv/155529",
+      "route": "BCC"
+    },
+    {
+      "id": 155765,
+      "name": "North Little Cottonwood Rd / Little Cottonwood Canyon Rd / SR-210 @ Little Cottonwood Rd / SR-209, SL",
+      "lat": 40.57186,
+      "lng": -111.77614,
+      "image": "https://www.udottraffic.utah.gov/map/Cctv/155765?isSnapshot=true",
+      "link": "https://www.udottraffic.utah.gov/map/Cctv/155765",
+      "route": "LCC"
+    },
+    {
+      "id": 155814,
+      "name": "Wasatch Blvd / SR-190/SR-210 @ Big Cottonwood Canyon Rd / Fort Union Blvd / SR-190, CWH",
+      "lat": 40.61965,
+      "lng": -111.78925,
+      "image": "https://www.udottraffic.utah.gov/map/Cctv/155814?isSnapshot=true",
+      "link": "https://www.udottraffic.utah.gov/map/Cctv/155814",
+      "route": "BCC"
+    },
+    {
+      "id": 155882,
+      "name": "Little Cottonwood Rd / 3335 E / SR-209 @ Old Wasatch Blvd / 9710 S, GNT",
+      "lat": 40.57796,
+      "lng": -111.803,
+      "image": "https://www.udottraffic.utah.gov/map/Cctv/155882?isSnapshot=true",
+      "link": "https://www.udottraffic.utah.gov/map/Cctv/155882",
       "route": "LCC"
     }
   ],
