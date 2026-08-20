@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-08-20T07:57:30Z",
+    "last_updated": "2026-08-20T08:49:40Z",
     "status": "success"
   },
   "canyons": {
@@ -15,24 +15,6 @@
   },
   "alerts": [],
   "cameras": [
-    {
-      "id": 153481,
-      "name": "Wasatch Blvd / SR-190/SR-210 @ Big Cottonwood Canyon Rd / Fort Union Blvd / SR-190, CWH",
-      "lat": 40.61965,
-      "lng": -111.78925,
-      "image": "https://www.udottraffic.utah.gov/map/Cctv/153481?isSnapshot=true",
-      "link": "https://www.udottraffic.utah.gov/map/Cctv/153481",
-      "route": "BCC"
-    },
-    {
-      "id": 153520,
-      "name": "North Little Cottonwood Rd / Little Cottonwood Canyon Rd / SR-210 @ Little Cottonwood Rd / SR-209, SL",
-      "lat": 40.57186,
-      "lng": -111.77614,
-      "image": "https://www.udottraffic.utah.gov/map/Cctv/153520?isSnapshot=true",
-      "link": "https://www.udottraffic.utah.gov/map/Cctv/153520",
-      "route": "LCC"
-    },
     {
       "id": 153616,
       "name": "Big Cottonwood Canyon Rd / SR-190 @ Solitude / MP 14.53, SL",
@@ -85,24 +67,6 @@
       "lng": -111.67448,
       "image": "https://www.udottraffic.utah.gov/map/Cctv/153844?isSnapshot=true",
       "link": "https://www.udottraffic.utah.gov/map/Cctv/153844",
-      "route": "LCC"
-    },
-    {
-      "id": 153863,
-      "name": "6200 S / Wasatch Blvd / SR-190 @ Wasatch Blvd / Millrock Dr, CWH",
-      "lat": 40.631086,
-      "lng": -111.799814,
-      "image": "https://www.udottraffic.utah.gov/map/Cctv/153863?isSnapshot=true",
-      "link": "https://www.udottraffic.utah.gov/map/Cctv/153863",
-      "route": "BCC"
-    },
-    {
-      "id": 153885,
-      "name": "Little Cottonwood Rd / 3335 E / SR-209 @ Old Wasatch Blvd / 9710 S, GNT",
-      "lat": 40.57796,
-      "lng": -111.803,
-      "image": "https://www.udottraffic.utah.gov/map/Cctv/153885?isSnapshot=true",
-      "link": "https://www.udottraffic.utah.gov/map/Cctv/153885",
       "route": "LCC"
     },
     {
@@ -185,15 +149,6 @@
       "image": "https://www.udottraffic.utah.gov/map/Cctv/154432?isSnapshot=true",
       "link": "https://www.udottraffic.utah.gov/map/Cctv/154432",
       "route": "LCC"
-    },
-    {
-      "id": 154440,
-      "name": "I-215 E NB @ 6200 S / SR-190 / MP 6.34, HDY",
-      "lat": 40.63746,
-      "lng": -111.80779,
-      "image": "https://www.udottraffic.utah.gov/map/Cctv/154440?isSnapshot=true",
-      "link": "https://www.udottraffic.utah.gov/map/Cctv/154440",
-      "route": "BCC"
     },
     {
       "id": 154444,
