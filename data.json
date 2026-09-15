@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-09-15T11:47:04Z",
+    "last_updated": "2026-09-15T16:41:21Z",
     "status": "success"
   },
   "canyons": {
@@ -265,6 +265,15 @@
       "lng": -111.803,
       "image": "https://www.udottraffic.utah.gov/map/Cctv/155882?isSnapshot=true",
       "link": "https://www.udottraffic.utah.gov/map/Cctv/155882",
+      "route": "LCC"
+    },
+    {
+      "id": 155967,
+      "name": "Little Cottonwood Rd / SR-210 @ Entry 2",
+      "lat": 40.580187,
+      "lng": -111.665024,
+      "image": "https://www.udottraffic.utah.gov/map/Cctv/155967?isSnapshot=true",
+      "link": "https://www.udottraffic.utah.gov/map/Cctv/155967",
       "route": "LCC"
     }
   ],
