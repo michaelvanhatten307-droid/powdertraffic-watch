@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "last_updated": "2026-10-20T15:17:58Z",
+    "last_updated": "2026-10-20T19:31:29Z",
     "status": "success"
   },
   "canyons": {
@@ -25,255 +25,255 @@
       "route": "LCC"
     },
     {
-      "id": 164767,
-      "name": "Little Cottonwood Rd / SR-210 @ Upper Vault / MP 5.96, SL",
-      "lat": 40.57141,
-      "lng": -111.73847,
-      "image": "https://www.udottraffic.utah.gov/map/Cctv/164767?isSnapshot=true",
-      "link": "https://www.udottraffic.utah.gov/map/Cctv/164767",
-      "route": "LCC"
-    },
-    {
-      "id": 164768,
-      "name": "Little Cottonwood Rd / SR-210 @ Lisa Falls / MP 6.5, SL",
-      "lat": 40.57169,
-      "lng": -111.72864,
-      "image": "https://www.udottraffic.utah.gov/map/Cctv/164768?isSnapshot=true",
-      "link": "https://www.udottraffic.utah.gov/map/Cctv/164768",
-      "route": "LCC"
-    },
-    {
-      "id": 164788,
-      "name": "Big Cottonwood Canyon Rd / SR-190 @ S-Curves / MP 6.38, SL",
-      "lat": 40.63338,
-      "lng": -111.72272,
-      "image": "https://www.udottraffic.utah.gov/map/Cctv/164788?isSnapshot=true",
-      "link": "https://www.udottraffic.utah.gov/map/Cctv/164788",
-      "route": "BCC"
-    },
-    {
-      "id": 164789,
-      "name": "Big Cottonwood Canyon Rd / SR-190 @ Butler / MP 10, SL",
-      "lat": 40.64824,
-      "lng": -111.66244,
-      "image": "https://www.udottraffic.utah.gov/map/Cctv/164789?isSnapshot=true",
-      "link": "https://www.udottraffic.utah.gov/map/Cctv/164789",
-      "route": "BCC"
-    },
-    {
-      "id": 164804,
-      "name": "Wasatch Blvd / 3650 E / SR-210 @ 7800 S / Bengal Blvd / Honeywood Cove Dr, CWH",
-      "lat": 40.60957,
-      "lng": -111.79214,
-      "image": "https://www.udottraffic.utah.gov/map/Cctv/164804?isSnapshot=true",
-      "link": "https://www.udottraffic.utah.gov/map/Cctv/164804",
-      "route": "LCC"
-    },
-    {
-      "id": 164812,
-      "name": "9400 S / Little Cottonwood Rd / SR-209 @ 2300 E / Quail Hollow Dr, SND",
-      "lat": 40.57908,
-      "lng": -111.82393,
-      "image": "https://www.udottraffic.utah.gov/map/Cctv/164812?isSnapshot=true",
-      "link": "https://www.udottraffic.utah.gov/map/Cctv/164812",
-      "route": "LCC"
-    },
-    {
-      "id": 164818,
-      "name": "Big Cottonwood Canyon Rd / SR-190 @ Silver Fork / MP 12.54, SL",
-      "lat": 40.63774,
-      "lng": -111.62091,
-      "image": "https://www.udottraffic.utah.gov/map/Cctv/164818?isSnapshot=true",
-      "link": "https://www.udottraffic.utah.gov/map/Cctv/164818",
-      "route": "BCC"
-    },
-    {
-      "id": 164835,
-      "name": "North Little Cottonwood Rd / Wasatch Blvd / 3600 E / SR-210 @ Wasatch Blvd / 8900 S, CWH",
-      "lat": 40.58925,
-      "lng": -111.79356,
-      "image": "https://www.udottraffic.utah.gov/map/Cctv/164835?isSnapshot=true",
-      "link": "https://www.udottraffic.utah.gov/map/Cctv/164835",
-      "route": "LCC"
-    },
-    {
-      "id": 164885,
-      "name": "6200 S / SR-190 @ 3000 E, HDY",
-      "lat": 40.63613,
-      "lng": -111.80567,
-      "image": "https://www.udottraffic.utah.gov/map/Cctv/164885?isSnapshot=true",
-      "link": "https://www.udottraffic.utah.gov/map/Cctv/164885",
-      "route": "BCC"
-    },
-    {
-      "id": 165123,
-      "name": "Big Cottonwood Canyon Rd / SR-190 @ Solitude / MP 14.53, SL",
-      "lat": 40.62125,
-      "lng": -111.5917,
-      "image": "https://www.udottraffic.utah.gov/map/Cctv/165123?isSnapshot=true",
-      "link": "https://www.udottraffic.utah.gov/map/Cctv/165123",
-      "route": "BCC"
-    },
-    {
-      "id": 165174,
-      "name": "Little Cottonwood Rd / SR-210 WB @ Upper White Pine / MP 9.7, SL",
-      "lat": 40.57911,
-      "lng": -111.67448,
-      "image": "https://www.udottraffic.utah.gov/map/Cctv/165174?isSnapshot=true",
-      "link": "https://www.udottraffic.utah.gov/map/Cctv/165174",
-      "route": "LCC"
-    },
-    {
-      "id": 165175,
-      "name": "Little Cottonwood Rd / SR-210 EB @ Alta Bypass / MP 10.95, SL",
-      "lat": 40.58493,
-      "lng": -111.65407,
-      "image": "https://www.udottraffic.utah.gov/map/Cctv/165175?isSnapshot=true",
-      "link": "https://www.udottraffic.utah.gov/map/Cctv/165175",
-      "route": "LCC"
-    },
-    {
-      "id": 165271,
-      "name": "Little Cottonwood Rd / SR-210 WB @ Alta / MP 12.16, ALT",
-      "lat": 40.59104,
-      "lng": -111.63377,
-      "image": "https://www.udottraffic.utah.gov/map/Cctv/165271?isSnapshot=true",
-      "link": "https://www.udottraffic.utah.gov/map/Cctv/165271",
-      "route": "LCC"
-    },
-    {
-      "id": 165939,
-      "name": "Little Cottonwood Rd / 9800 S / SR-209 @ Wasatch Blvd / 3400 E, SL",
-      "lat": 40.57312,
-      "lng": -111.79848,
-      "image": "https://www.udottraffic.utah.gov/map/Cctv/165939?isSnapshot=true",
-      "link": "https://www.udottraffic.utah.gov/map/Cctv/165939",
-      "route": "LCC"
-    },
-    {
-      "id": 165945,
-      "name": "Big Cottonwood Canyon Rd / SR-190 @ Cardiff Fork / MP 10.74, SL",
-      "lat": 40.65035,
-      "lng": -111.65022,
-      "image": "https://www.udottraffic.utah.gov/map/Cctv/165945?isSnapshot=true",
-      "link": "https://www.udottraffic.utah.gov/map/Cctv/165945",
-      "route": "BCC"
-    },
-    {
-      "id": 165998,
-      "name": "Little Cottonwood Rd / SR-210 EB @ White Pine Parking / MP 9.2, SL",
-      "lat": 40.57609,
-      "lng": -111.68218,
-      "image": "https://www.udottraffic.utah.gov/map/Cctv/165998?isSnapshot=true",
-      "link": "https://www.udottraffic.utah.gov/map/Cctv/165998",
-      "route": "LCC"
-    },
-    {
-      "id": 165999,
-      "name": "Little Cottonwood Rd / SR-210 @ White Pine / MP 8.7, SL",
-      "lat": 40.5745,
-      "lng": -111.69099,
-      "image": "https://www.udottraffic.utah.gov/map/Cctv/165999?isSnapshot=true",
-      "link": "https://www.udottraffic.utah.gov/map/Cctv/165999",
-      "route": "LCC"
-    },
-    {
-      "id": 166000,
-      "name": "Little Cottonwood Rd / SR-210 @ Tanners Flat / MP 7.94, SL",
-      "lat": 40.5707,
-      "lng": -111.7028,
-      "image": "https://www.udottraffic.utah.gov/map/Cctv/166000?isSnapshot=true",
-      "link": "https://www.udottraffic.utah.gov/map/Cctv/166000",
-      "route": "LCC"
-    },
-    {
-      "id": 166033,
-      "name": "Little Cottonwood Rd / SR-210 EB @ Seven Turns / MP 7.4, SL",
-      "lat": 40.57123,
-      "lng": -111.71266,
-      "image": "https://www.udottraffic.utah.gov/map/Cctv/166033?isSnapshot=true",
-      "link": "https://www.udottraffic.utah.gov/map/Cctv/166033",
-      "route": "LCC"
-    },
-    {
-      "id": 167215,
-      "name": "Wasatch Blvd / 3650 E / SR-210 @ 7700 S, CWH",
-      "lat": 40.61228,
-      "lng": -111.79024,
-      "image": "https://www.udottraffic.utah.gov/map/Cctv/167215?isSnapshot=true",
-      "link": "https://www.udottraffic.utah.gov/map/Cctv/167215",
-      "route": "LCC"
-    },
-    {
-      "id": 167426,
+      "id": 168459,
       "name": "Little Cottonwood Rd / 3335 E / SR-209 @ Old Wasatch Blvd / 9710 S, GNT",
       "lat": 40.57796,
       "lng": -111.803,
-      "image": "https://www.udottraffic.utah.gov/map/Cctv/167426?isSnapshot=true",
-      "link": "https://www.udottraffic.utah.gov/map/Cctv/167426",
+      "image": "https://www.udottraffic.utah.gov/map/Cctv/168459?isSnapshot=true",
+      "link": "https://www.udottraffic.utah.gov/map/Cctv/168459",
       "route": "LCC"
     },
     {
-      "id": 167437,
-      "name": "Big Cottonwood Canyon Rd / SR-190 @ Dogwood / MP 4.1, SL",
-      "lat": 40.62417,
-      "lng": -111.75059,
-      "image": "https://www.udottraffic.utah.gov/map/Cctv/167437?isSnapshot=true",
-      "link": "https://www.udottraffic.utah.gov/map/Cctv/167437",
-      "route": "BCC"
-    },
-    {
-      "id": 167718,
-      "name": "Little Cottonwood Rd / SR-210 RWIS EB @ Powerhouse / MP 5.67, SL",
-      "lat": 40.57096,
-      "lng": -111.74374,
-      "image": "https://www.udottraffic.utah.gov/map/Cctv/167718?isSnapshot=true",
-      "link": "https://www.udottraffic.utah.gov/map/Cctv/167718",
+      "id": 168467,
+      "name": "Little Cottonwood Rd / SR-210 EB @ Seven Turns / MP 7.4, SL",
+      "lat": 40.57123,
+      "lng": -111.71266,
+      "image": "https://www.udottraffic.utah.gov/map/Cctv/168467?isSnapshot=true",
+      "link": "https://www.udottraffic.utah.gov/map/Cctv/168467",
       "route": "LCC"
     },
     {
-      "id": 167778,
-      "name": "North Little Cottonwood Rd / Little Cottonwood Canyon Rd / SR-210 @ Little Cottonwood Rd / SR-209, SL",
-      "lat": 40.57186,
-      "lng": -111.77614,
-      "image": "https://www.udottraffic.utah.gov/map/Cctv/167778?isSnapshot=true",
-      "link": "https://www.udottraffic.utah.gov/map/Cctv/167778",
-      "route": "LCC"
-    },
-    {
-      "id": 167802,
-      "name": "Wasatch Blvd / SR-190/SR-210 @ Big Cottonwood Canyon Rd / Fort Union Blvd / SR-190, CWH",
-      "lat": 40.61965,
-      "lng": -111.78925,
-      "image": "https://www.udottraffic.utah.gov/map/Cctv/167802?isSnapshot=true",
-      "link": "https://www.udottraffic.utah.gov/map/Cctv/167802",
-      "route": "BCC"
-    },
-    {
-      "id": 167944,
-      "name": "Big Cottonwood Canyon Rd / SR-190 @ Brighton / MP 16.07, BTN",
-      "lat": 40.603591,
-      "lng": -111.582534,
-      "image": "https://www.udottraffic.utah.gov/map/Cctv/167944?isSnapshot=true",
-      "link": "https://www.udottraffic.utah.gov/map/Cctv/167944",
-      "route": "BCC"
-    },
-    {
-      "id": 168117,
-      "name": "6200 S / Wasatch Blvd / SR-190 @ Wasatch Blvd / Millrock Dr, CWH",
-      "lat": 40.631086,
-      "lng": -111.799814,
-      "image": "https://www.udottraffic.utah.gov/map/Cctv/168117?isSnapshot=true",
-      "link": "https://www.udottraffic.utah.gov/map/Cctv/168117",
-      "route": "BCC"
-    },
-    {
-      "id": 168297,
+      "id": 168652,
       "name": "I-215 E NB @ 6200 S / SR-190 / MP 6.34, HDY",
       "lat": 40.63746,
       "lng": -111.80779,
-      "image": "https://www.udottraffic.utah.gov/map/Cctv/168297?isSnapshot=true",
-      "link": "https://www.udottraffic.utah.gov/map/Cctv/168297",
+      "image": "https://www.udottraffic.utah.gov/map/Cctv/168652?isSnapshot=true",
+      "link": "https://www.udottraffic.utah.gov/map/Cctv/168652",
+      "route": "BCC"
+    },
+    {
+      "id": 168689,
+      "name": "North Little Cottonwood Rd / Little Cottonwood Canyon Rd / SR-210 @ Little Cottonwood Rd / SR-209, SL",
+      "lat": 40.57186,
+      "lng": -111.77614,
+      "image": "https://www.udottraffic.utah.gov/map/Cctv/168689?isSnapshot=true",
+      "link": "https://www.udottraffic.utah.gov/map/Cctv/168689",
+      "route": "LCC"
+    },
+    {
+      "id": 168716,
+      "name": "Little Cottonwood Rd / SR-210 @ Lisa Falls / MP 6.5, SL",
+      "lat": 40.57169,
+      "lng": -111.72864,
+      "image": "https://www.udottraffic.utah.gov/map/Cctv/168716?isSnapshot=true",
+      "link": "https://www.udottraffic.utah.gov/map/Cctv/168716",
+      "route": "LCC"
+    },
+    {
+      "id": 168736,
+      "name": "Big Cottonwood Canyon Rd / SR-190 @ S-Curves / MP 6.38, SL",
+      "lat": 40.63338,
+      "lng": -111.72272,
+      "image": "https://www.udottraffic.utah.gov/map/Cctv/168736?isSnapshot=true",
+      "link": "https://www.udottraffic.utah.gov/map/Cctv/168736",
+      "route": "BCC"
+    },
+    {
+      "id": 168737,
+      "name": "Big Cottonwood Canyon Rd / SR-190 @ Butler / MP 10, SL",
+      "lat": 40.64824,
+      "lng": -111.66244,
+      "image": "https://www.udottraffic.utah.gov/map/Cctv/168737?isSnapshot=true",
+      "link": "https://www.udottraffic.utah.gov/map/Cctv/168737",
+      "route": "BCC"
+    },
+    {
+      "id": 168816,
+      "name": "Big Cottonwood Canyon Rd / SR-190 @ Dogwood / MP 4.1, SL",
+      "lat": 40.62417,
+      "lng": -111.75059,
+      "image": "https://www.udottraffic.utah.gov/map/Cctv/168816?isSnapshot=true",
+      "link": "https://www.udottraffic.utah.gov/map/Cctv/168816",
+      "route": "BCC"
+    },
+    {
+      "id": 168866,
+      "name": "9400 S / Little Cottonwood Rd / SR-209 @ 2300 E / Quail Hollow Dr, SND",
+      "lat": 40.57908,
+      "lng": -111.82393,
+      "image": "https://www.udottraffic.utah.gov/map/Cctv/168866?isSnapshot=true",
+      "link": "https://www.udottraffic.utah.gov/map/Cctv/168866",
+      "route": "LCC"
+    },
+    {
+      "id": 168884,
+      "name": "Wasatch Blvd / SR-190/SR-210 @ Big Cottonwood Canyon Rd / Fort Union Blvd / SR-190, CWH",
+      "lat": 40.61965,
+      "lng": -111.78925,
+      "image": "https://www.udottraffic.utah.gov/map/Cctv/168884?isSnapshot=true",
+      "link": "https://www.udottraffic.utah.gov/map/Cctv/168884",
+      "route": "BCC"
+    },
+    {
+      "id": 168932,
+      "name": "Little Cottonwood Rd / SR-210 EB @ White Pine Parking / MP 9.2, SL",
+      "lat": 40.57609,
+      "lng": -111.68218,
+      "image": "https://www.udottraffic.utah.gov/map/Cctv/168932?isSnapshot=true",
+      "link": "https://www.udottraffic.utah.gov/map/Cctv/168932",
+      "route": "LCC"
+    },
+    {
+      "id": 169049,
+      "name": "6200 S / Wasatch Blvd / SR-190 @ Wasatch Blvd / Millrock Dr, CWH",
+      "lat": 40.631086,
+      "lng": -111.799814,
+      "image": "https://www.udottraffic.utah.gov/map/Cctv/169049?isSnapshot=true",
+      "link": "https://www.udottraffic.utah.gov/map/Cctv/169049",
+      "route": "BCC"
+    },
+    {
+      "id": 169114,
+      "name": "Little Cottonwood Rd / SR-210 @ White Pine / MP 8.7, SL",
+      "lat": 40.5745,
+      "lng": -111.69099,
+      "image": "https://www.udottraffic.utah.gov/map/Cctv/169114?isSnapshot=true",
+      "link": "https://www.udottraffic.utah.gov/map/Cctv/169114",
+      "route": "LCC"
+    },
+    {
+      "id": 169144,
+      "name": "Little Cottonwood Rd / SR-210 @ Tanners Flat / MP 7.94, SL",
+      "lat": 40.5707,
+      "lng": -111.7028,
+      "image": "https://www.udottraffic.utah.gov/map/Cctv/169144?isSnapshot=true",
+      "link": "https://www.udottraffic.utah.gov/map/Cctv/169144",
+      "route": "LCC"
+    },
+    {
+      "id": 169159,
+      "name": "Big Cottonwood Canyon Rd / SR-190 @ Cardiff Fork / MP 10.74, SL",
+      "lat": 40.65035,
+      "lng": -111.65022,
+      "image": "https://www.udottraffic.utah.gov/map/Cctv/169159?isSnapshot=true",
+      "link": "https://www.udottraffic.utah.gov/map/Cctv/169159",
+      "route": "BCC"
+    },
+    {
+      "id": 169162,
+      "name": "Little Cottonwood Rd / SR-210 @ Upper Vault / MP 5.96, SL",
+      "lat": 40.57141,
+      "lng": -111.73847,
+      "image": "https://www.udottraffic.utah.gov/map/Cctv/169162?isSnapshot=true",
+      "link": "https://www.udottraffic.utah.gov/map/Cctv/169162",
+      "route": "LCC"
+    },
+    {
+      "id": 169196,
+      "name": "Big Cottonwood Canyon Rd / SR-190 @ Silver Fork / MP 12.54, SL",
+      "lat": 40.63774,
+      "lng": -111.62091,
+      "image": "https://www.udottraffic.utah.gov/map/Cctv/169196?isSnapshot=true",
+      "link": "https://www.udottraffic.utah.gov/map/Cctv/169196",
+      "route": "BCC"
+    },
+    {
+      "id": 169432,
+      "name": "North Little Cottonwood Rd / Wasatch Blvd / 3600 E / SR-210 @ Wasatch Blvd / 8900 S, CWH",
+      "lat": 40.58925,
+      "lng": -111.79356,
+      "image": "https://www.udottraffic.utah.gov/map/Cctv/169432?isSnapshot=true",
+      "link": "https://www.udottraffic.utah.gov/map/Cctv/169432",
+      "route": "LCC"
+    },
+    {
+      "id": 169502,
+      "name": "Little Cottonwood Rd / SR-210 EB @ Alta Bypass / MP 10.95, SL",
+      "lat": 40.58493,
+      "lng": -111.65407,
+      "image": "https://www.udottraffic.utah.gov/map/Cctv/169502?isSnapshot=true",
+      "link": "https://www.udottraffic.utah.gov/map/Cctv/169502",
+      "route": "LCC"
+    },
+    {
+      "id": 169588,
+      "name": "Little Cottonwood Rd / SR-210 WB @ Upper White Pine / MP 9.7, SL",
+      "lat": 40.57911,
+      "lng": -111.67448,
+      "image": "https://www.udottraffic.utah.gov/map/Cctv/169588?isSnapshot=true",
+      "link": "https://www.udottraffic.utah.gov/map/Cctv/169588",
+      "route": "LCC"
+    },
+    {
+      "id": 169648,
+      "name": "Big Cottonwood Canyon Rd / SR-190 @ Solitude / MP 14.53, SL",
+      "lat": 40.62125,
+      "lng": -111.5917,
+      "image": "https://www.udottraffic.utah.gov/map/Cctv/169648?isSnapshot=true",
+      "link": "https://www.udottraffic.utah.gov/map/Cctv/169648",
+      "route": "BCC"
+    },
+    {
+      "id": 169734,
+      "name": "Wasatch Blvd / 3650 E / SR-210 @ 7700 S, CWH",
+      "lat": 40.61228,
+      "lng": -111.79024,
+      "image": "https://www.udottraffic.utah.gov/map/Cctv/169734?isSnapshot=true",
+      "link": "https://www.udottraffic.utah.gov/map/Cctv/169734",
+      "route": "LCC"
+    },
+    {
+      "id": 169781,
+      "name": "Big Cottonwood Canyon Rd / SR-190 @ Brighton / MP 16.07, BTN",
+      "lat": 40.603591,
+      "lng": -111.582534,
+      "image": "https://www.udottraffic.utah.gov/map/Cctv/169781?isSnapshot=true",
+      "link": "https://www.udottraffic.utah.gov/map/Cctv/169781",
+      "route": "BCC"
+    },
+    {
+      "id": 169795,
+      "name": "Wasatch Blvd / 3650 E / SR-210 @ 7800 S / Bengal Blvd / Honeywood Cove Dr, CWH",
+      "lat": 40.60957,
+      "lng": -111.79214,
+      "image": "https://www.udottraffic.utah.gov/map/Cctv/169795?isSnapshot=true",
+      "link": "https://www.udottraffic.utah.gov/map/Cctv/169795",
+      "route": "LCC"
+    },
+    {
+      "id": 169815,
+      "name": "Little Cottonwood Rd / SR-210 RWIS EB @ Powerhouse / MP 5.67, SL",
+      "lat": 40.57096,
+      "lng": -111.74374,
+      "image": "https://www.udottraffic.utah.gov/map/Cctv/169815?isSnapshot=true",
+      "link": "https://www.udottraffic.utah.gov/map/Cctv/169815",
+      "route": "LCC"
+    },
+    {
+      "id": 170298,
+      "name": "Little Cottonwood Rd / 9800 S / SR-209 @ Wasatch Blvd / 3400 E, SL",
+      "lat": 40.57312,
+      "lng": -111.79848,
+      "image": "https://www.udottraffic.utah.gov/map/Cctv/170298?isSnapshot=true",
+      "link": "https://www.udottraffic.utah.gov/map/Cctv/170298",
+      "route": "LCC"
+    },
+    {
+      "id": 170320,
+      "name": "Little Cottonwood Rd / SR-210 WB @ Alta / MP 12.16, ALT",
+      "lat": 40.59104,
+      "lng": -111.63377,
+      "image": "https://www.udottraffic.utah.gov/map/Cctv/170320?isSnapshot=true",
+      "link": "https://www.udottraffic.utah.gov/map/Cctv/170320",
+      "route": "LCC"
+    },
+    {
+      "id": 170322,
+      "name": "6200 S / SR-190 @ 3000 E, HDY",
+      "lat": 40.63613,
+      "lng": -111.80567,
+      "image": "https://www.udottraffic.utah.gov/map/Cctv/170322?isSnapshot=true",
+      "link": "https://www.udottraffic.utah.gov/map/Cctv/170322",
       "route": "BCC"
     }
   ],
